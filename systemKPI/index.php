@@ -72,7 +72,7 @@ $count = mysqli_num_rows($result);
     <font size="2" color="red">>> &nbsp; </font>
     <font size="2" color="black">
       "This information shows the potential of the people in the team. There is no right to modify the information in
-      any case."
+      any case.      111111111111111111111111111111111111111111111111111111111 "
     </font>
   </marquee>
   <!-- end slide -->
