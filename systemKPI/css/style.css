@@ -1,0 +1,149 @@
+@media only screen and (max-width: 1140px) {
+  /* Dropdown Button */
+  .dropbtn {
+    background-color: rgba(221, 221, 221, 0);
+      color: rgb(0, 0, 0);
+      padding: 2px;
+     size: 2px;
+      font-size: 2px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      text-decoration: none;
+  /*margin-left: 155px;*/
+    }
+    /* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  border: 1px solid #ddd;
+  z-index: 1;
+  /*margin-left: 155px;*/
+}
+}
+
+@media only screen and (min-width: 1140px) {
+  /* Dropdown Button */
+  .dropbtn {
+    background-color: rgba(221, 221, 221, 0);
+      color: rgb(0, 0, 0);
+      padding: 2px;
+     size: 2px;
+      font-size: 2px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      text-decoration: none;
+  /*margin-left: 155px;*/
+    }
+    /* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  border: 1px solid #ddd;
+  z-index: 1;
+  /*margin-left: 155px;*/
+}
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #97e29ad7;
+}
+
+/* The search field */
+#myInput {
+  box-sizing: border-box;
+  background-image: url('searchicon.png');
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+/* The search field when it gets focus/clicked on */
+#myInput:focus {outline: 3px solid #ddd;}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  float: right;
+}
+
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+
+img.filterbutton{
+  width: 20px;
+  height: 20px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+      .md-mobile-picker-header {
+  font-size: 14px;
+}
+
+input.md-mobile-picker-input {
+  color: initial;
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0 12px 0;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  font-family: arial, verdana, sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+}
+
+.md-mobile-picker-button.mbsc-button {
+  font-size: 13px;
+  padding: 0 15px;
+  line-height: 36px;
+  float: right;
+  margin: 6px 0;
+  width: 100%;
+}
+
+.mbsc-col-no-padding {
+  padding-left: 0;
+}
+
+.md-mobile-picker-box-label.mbsc-textfield-wrapper-box,
+.md-mobile-picker-box-label .mbsc-textfield-wrapper-box,
+.md-mobile-picker-inline {
+  margin: 6px 0 12px 0;
+}
+
+.mbsc-calendar-cell-inner {
+  height: 48px;
+}
