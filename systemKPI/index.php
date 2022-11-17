@@ -96,7 +96,7 @@ $count = mysqli_num_rows($result);
       <div class="row">
         <div class="col-9 col-sm-9">
           <select id="Month" name="Month"
-            style="width:100%; height:max-content; font-size:24px; background-color:#FBDCE4; border-radius:8px; font-family: 'IBM Plex Sans Thai', sans-serif;">
+            style="width:100%; height:max-content; font-size:24px; background-color:#FBDCE4; border-radius:8px; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
             <option value selected> ---- เดือน ----</option>
             <option value="มกราคม">มกราคม</option>
             <option value="กุมภาพันธ์">กุมภาพันธ์</option>
@@ -115,7 +115,7 @@ $count = mysqli_num_rows($result);
         </div>
         <div class="col-3 col-sm-3">
           <select id="NameAdmin" name="Admin"
-            style="width:100% ;height:max-content; font-size:24px; background-color:#E8C8DD; border-radius:8px; font-family: 'IBM Plex Sans Thai', sans-serif;">
+            style="width:100% ;height:max-content; font-size:24px; background-color:#E8C8DD; border-radius:8px;  text-align:center; font-family: 'IBM Plex Sans Thai', sans-serif;">
             <option value="1">ALL</option>
             <option value="2">จักรรินทร์</option>
             <option value="3">นุจรีย์</option>
@@ -148,7 +148,7 @@ $count = mysqli_num_rows($result);
             <thead
               style="background-color: #ffb7f9b7; font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 18px; text-align: center;">
               <tr>
-                <th>ปัญหา
+                <th style="display: #;  text-align:center;">ปัญหา
                   <!-- ปุ่ม filter และ dropdown-->
                   <div class="dropdown">
                     <button onclick="myFunction()" class="dropbtn">
@@ -156,115 +156,117 @@ $count = mysqli_num_rows($result);
                         <img src="im/6488674.png" alt="ADbanner" class="filterbutton">
                       </span>
                     </button>
-                    <!-- ส่วนของปุ่ม filter-->
-                    <form action="" method="GET" >
-                      <div id="myDropdown" class="dropdown-content " >
-                        
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">Computer&Notebook
-                        ใช้งานไม่ได้
-                        <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">E-mail
-                        รับส่งใช้งานไม่ได้
-                        <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">File Share
-                        ใช้งานไม่ได้
-                        <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">Internet
-                        ใช้งานไม่ได้
-                        <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">Service
-                        ตู้บุญเติมมีปัญหา
-                        <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอเพิ่ม สิทธิ์
-                        การใช้งานระบบ
-                        <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอติดตั้งโปรแกรมเพิ่มเติม
-                        <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">งานโปรเจค
-                        <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอยืม PC &
-                        Notebook / อุปกรณ์คอมพิวเตอร์
-                        <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา Printer /
-                        Scanner / FAX
-                        <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา
-                        ระบบโทรศัพท์ / CRM
-                        <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">รีเซท / ปลดล็อค
-                        รหัสการใช้งานระบบ
-                        <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">ส่งเครื่องพนักงานใหม่
-                        <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">อื่น ๆ
-                        <br><input type="checkbox" id="myCheck" onclick="myFunction2()">ส่งเครื่องพนักงานใหม่
-                        <br><input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา Cenpay
-                        <br>
-
-                        <button type="submit" class="btn btn-warning" onclick="Checkingall()">ดูทั้งหมด  </button>
-                        <button type="submit" class="btn btn-success">confirm</button>
-                      </div>
-                    </form>
-                  </div>
-                  <!-- สิ้นสุด ปุ่ม filter -->
                 </th>
-                <th>เกินเวลา</th>
-                <th>สำเร็จตามเวลา</th>
-                <th>จำนวน</th>
-              </tr>
-            </thead>
-            <!-- สินสุด ส่วนของหัวตาราง -->
 
-            <!-- ส่วนของการใส่ข้อมูล Record -->
-            <tbody>
-              <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-              <tr>
-                <td>
-                  <?php echo $row["type_problem_name"]; ?>
-                </td>
-                <td>
-                  <?php echo $row["id_problem"]; ?>
-                </td>
-                <td>
-                  <?php echo $row["id_problem"]; ?>
-                </td>
-                <td>
-                  <?php echo $row["id_problem"]; ?>
-                </td>
-              </tr>
-              <?php } ?>
-            </tbody>
-            <!--  สินสุด ส่วนของการใส่ข้อมูล Record -->
-          </table>
+                <!-- ส่วนของปุ่ม filter-->
+                <form action="" method="GET">
+                  <div id="myDropdown" class="dropdown-content ">
 
-          <?php } else { ?>
-          <div class="alert alert-danger">
-            ไม่มีข้อมูล
-          </div>
-          <?php }
+                    <input type="checkbox" id="myCheck" onclick="myFunction2()">Computer&Notebook
+                    ใช้งานไม่ได้
+                    <br>
+                    <input type="checkbox" id="myCheck" onclick="myFunction2()">E-mail
+                    รับส่งใช้งานไม่ได้
+                    <br>
+                    <input type="checkbox" id="myCheck" onclick="myFunction2()">File Share
+                    ใช้งานไม่ได้
+                    <br>
+                    <input type="checkbox" id="myCheck" onclick="myFunction2()">Internet
+                    ใช้งานไม่ได้
+                    <br>
+                    <input type="checkbox" id="myCheck" onclick="myFunction2()">Service
+                    ตู้บุญเติมมีปัญหา
+                    <br>
+                    <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอเพิ่ม สิทธิ์
+                    การใช้งานระบบ
+                    <br>
+                    <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอติดตั้งโปรแกรมเพิ่มเติม
+                    <br>
+                    <input type="checkbox" id="myCheck" onclick="myFunction2()">งานโปรเจค
+                    <br>
+                    <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอยืม PC &
+                    Notebook / อุปกรณ์คอมพิวเตอร์
+                    <br>
+                    <input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา Printer /
+                    Scanner / FAX
+                    <br>
+                    <input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา
+                    ระบบโทรศัพท์ / CRM
+                    <br>
+                    <input type="checkbox" id="myCheck" onclick="myFunction2()">รีเซท / ปลดล็อค
+                    รหัสการใช้งานระบบ
+                    <br>
+                    <input type="checkbox" id="myCheck" onclick="myFunction2()">ส่งเครื่องพนักงานใหม่
+                    <br>
+                    <input type="checkbox" id="myCheck" onclick="myFunction2()">อื่น ๆ
+                    <br><input type="checkbox" id="myCheck" onclick="myFunction2()">ส่งเครื่องพนักงานใหม่
+                    <br><input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา Cenpay
+                    <br>
+
+                    <button type="submit" class="btn btn-warning" onclick="Checkingall()">ดูทั้งหมด </button>
+                    <button type="submit" class="btn btn-success">confirm</button>
+                  </div>
+                </form>
+        </div>
+        <!-- สิ้นสุด ปุ่ม filter -->
+
+        <th style="display: #;  text-align:center;">เกินเวลา</th>
+        <th style="display: #;  text-align:center;">สำเร็จตามเวลา</th>
+        <th style="display: #;  text-align:center;">จำนวน</th>
+        </tr>
+        </thead>
+        <!-- สินสุด ส่วนของหัวตาราง -->
+
+        <!-- ส่วนของการใส่ข้อมูล Record -->
+        <tbody>
+          <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+          <tr>
+            <td>
+              <?php echo $row["type_problem_name"]; ?>
+            </td>
+            <td>
+              <?php echo $row["id_problem"]; ?>
+            </td>
+            <td>
+              <?php echo $row["id_problem"]; ?>
+            </td>
+            <td>
+              <?php echo $row["id_problem"]; ?>
+            </td>
+          </tr>
+          <?php } ?>
+        </tbody>
+        <!--  สินสุด ส่วนของการใส่ข้อมูล Record -->
+        </table>
+
+        <?php } else { ?>
+        <div class="alert alert-danger">
+          ไม่มีข้อมูล
+        </div>
+        <?php }
           mysqli_close($conn); ?>
 
-        </div>
-
-        <!-- แสดงตารางฝั่งคำนวณ KPI-->
-        <div class="col-9 col-sm-3">
-          <table class="table table-bordered">
-            <thead
-              style="background-color:greenyellow; font-family: 'IBM Plex Sans Thai', sans-serif; text-shadow: 10px; font-size: 20px;">
-              <tr>
-                <th>คิดเป็นเปอร์เซนต์</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td style="text-align:center;">98.45%</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
       </div>
+
+      <!-- แสดงตารางฝั่งคำนวณ KPI-->
+      <div class="col-9 col-sm-3">
+        <table class="table table-bordered">
+          <thead
+            style="background-color:greenyellow; font-family: 'IBM Plex Sans Thai', sans-serif; text-shadow: 10px; font-size: 20px;">
+            <tr>
+              <th>คิดเป็นเปอร์เซนต์</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td style="text-align:center;">98.45%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
     </div>
   </body>
 
