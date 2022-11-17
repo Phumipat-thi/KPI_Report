@@ -241,6 +241,7 @@ $count = mysqli_num_rows($result);
             </td>
           </tr>
           <?php } ?>
+          
         </tbody>
         <!--  สินสุด ส่วนของการใส่ข้อมูล Record -->
         </table>
@@ -260,13 +261,13 @@ $count = mysqli_num_rows($result);
           <thead
             style="background-color:greenyellow; font-family: 'IBM Plex Sans Thai', sans-serif; text-shadow: 10px; font-size: 20px;">
             <tr>
-              <th>คิดเป็นเปอร์เซนต์</th>
+              <th style="text-align:center;">คิดเป็นเปอร์เซนต์</th>
             </tr>
           </thead>
 
           <tbody>
             <tr>
-              <td style="text-align:center;">98.45%</td>
+              <td  style="text-align:center; height:555px; font-size: 28px; background-color: #AEFDD8;"><br><br><br><br><br><br>98.45%</td>
             </tr>
           </tbody>
         </table>
