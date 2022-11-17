@@ -27,20 +27,8 @@ $b=777;
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link href="css/mobiscroll.javascript.min.css" rel="stylesheet" />
   <link href="css/style.css" rel="stylesheet" />
-  <script src="js/mobiscroll.javascript.min.js"></script>
   <script src="js/Drop.js"></script>
-
-
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Display Date and Time in Javascript</title>
-  <script type="text/javascript" src="Date_time.js"></script>
-</head>
-
-<body>
-  <span id="date_time"></span>
-  <script type="text/javascript">window.onload = date_time('date_time');</script>
   </head>
 
   <body>
