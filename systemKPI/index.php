@@ -96,7 +96,7 @@ $count = mysqli_num_rows($result);
       <div class="row">
         <div class="col-9 col-sm-9">
           <select id="Month" name="Month"
-            style="width:100%; height:max-content; font-size:24px; background-color:#FBDCE4; border-radius:8px; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
+            style="width:100%; height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
             <option value selected> ---- เดือน ----</option>
             <option value="มกราคม">มกราคม</option>
             <option value="กุมภาพันธ์">กุมภาพันธ์</option>
@@ -115,7 +115,7 @@ $count = mysqli_num_rows($result);
         </div>
         <div class="col-3 col-sm-3">
           <select id="NameAdmin" name="Admin"
-            style="width:100% ;height:max-content; font-size:24px; background-color:#E8C8DD; border-radius:8px;  text-align:center; font-family: 'IBM Plex Sans Thai', sans-serif;">
+            style="width:100% ;height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; text-align:center; font-family: 'IBM Plex Sans Thai', sans-serif;">
             <option value="1">ALL</option>
             <option value="2">จักรรินทร์</option>
             <option value="3">นุจรีย์</option>
@@ -259,7 +259,7 @@ $count = mysqli_num_rows($result);
       <div class="col-9 col-sm-3">
         <table class="table table-bordered">
           <thead
-            style="background-color:greenyellow; font-family: 'IBM Plex Sans Thai', sans-serif; text-shadow: 10px; font-size: 20px;">
+            style="background-color:#FFCCCC; font-family: 'IBM Plex Sans Thai', sans-serif; text-shadow: 10px; font-size: 20px;">
             <tr>
               <th style="text-align:center;">คิดเป็นเปอร์เซนต์</th>
             </tr>
@@ -267,7 +267,7 @@ $count = mysqli_num_rows($result);
 
           <tbody>
             <tr>
-              <td  style="text-align:center; height:555px; font-size: 28px; background-color: #AEFDD8;"><br><br><br><br><br><br>98.45%</td>
+              <td  style="text-align:center; height:555px; font-size: 28px; background-color: #CCFFCC;"><br><br><br><br><br><br>98.45%</td>
             </tr>
           </tbody>
         </table>
