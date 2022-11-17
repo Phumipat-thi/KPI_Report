@@ -6,6 +6,9 @@ $sql = "SELECT * FROM  `type_problem` WHERE 1";
 
 $result = mysqli_query($conn, $sql);
 $count = mysqli_num_rows($result);
+
+$a =666;
+$b=777;
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -56,13 +59,13 @@ $count = mysqli_num_rows($result);
             style="display: inline-block; position: absolute; right: 0px; margin-top: 8px; margin-right: 10px;">
 
             <input align="center" class="btn btn-success" type="submit" value="Export file CSV." name="ext_report_it"
-              name="ext_report_it" >
+              name="ext_report_it">
 
 
-            <input type="text" id="daterange" name="daterange" value="" style="height: 33px;" width="80px"; >
+            <input type="text" id="daterange" name="daterange" value="" style="height: 33px;" width="80px" ;>
 
-            <select name="rp_type_problem" id="rp_type_problem" style="height: 33px;" width="80px"; >
-              
+            <select name="rp_type_problem" id="rp_type_problem" style="height: 33px;" width="80px" ;>
+
               <option value selected> ---- ประเภทปัญหาที่ต้องการ Export ----</option>
               <option value="1">Computer&Notebook ใช้งานไม่ได้</option>
               <option value="2">E-mail ใช้งานไม่ได้</option>
@@ -228,9 +231,9 @@ $count = mysqli_num_rows($result);
 
         <!-- ส่วนของการใส่ข้อมูล Record -->
         <tbody>
-        <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+          <?php while ($row = mysqli_fetch_assoc($result)) { ?>
           <tr>
-         
+
             <td>
               <?php echo $row["type_problem_name"]; ?>
             </td>
@@ -243,12 +246,12 @@ $count = mysqli_num_rows($result);
             <td>
               <?php echo $row["id_problem"]; ?>
             </td>
-           
+
           </tr>
           <?php } ?>
         </tbody>
         <tbody style="background-color: #adf2ff ;">
-          <tr style="font-size:24px; font-weight: 600; text-align: center;" >
+          <tr style="font-size:24px; font-weight: 600; text-align: center;">
             <td colspan="2">รวม</td>
 
             <td>666</td>
@@ -271,7 +274,14 @@ $count = mysqli_num_rows($result);
 
           <tbody>
             <tr>
-              <td  style="text-align:center; height:608px; font-size: 28px; background-color: #AEFDD8;"><br><br><br><br><br><br>98.45%</td>
+              <td style="text-align:center; height:608px; font-size: 28px; background-color: #AEFDD8;">
+                <br><br><br><br><br><br>
+                <?php
+                $c = ($a/$b)*100;
+                $ans= number_format($c,2);
+                echo "$ans"."%";
+              ?>
+              </td>
             </tr>
           </tbody>
         </table>
