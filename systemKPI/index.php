@@ -142,7 +142,6 @@ $count = mysqli_num_rows($result);
       <div class="row">
         <!-- แสดงตารางฝั่งปัญหา-->
         <div class="col-9 col-sm-9">
-          <?php if ($count > 0) { ?>
           <table class="table table-bordered">
             <!-- ส่วนของหัวตาราง -->
             <thead
@@ -162,9 +161,8 @@ $count = mysqli_num_rows($result);
                     <!-- ส่วนของปุ่ม filter-->
                     <form action="" method="GET">
                       <div id="myDropdown" class="dropdown-content ">
-                        <div style="text-align:left;"> 
-                        <input type="checkbox" id="myCheck"
-                            onclick="myFunction2()">Computer&Notebook
+                        <div style="text-align:left;">
+                          <input type="checkbox" id="myCheck" onclick="myFunction2()">Computer&Notebook
                           ใช้งานไม่ได้
                           <br>
                           <input type="checkbox" id="myCheck" onclick="myFunction2()">E-mail
@@ -225,8 +223,9 @@ $count = mysqli_num_rows($result);
 
         <!-- ส่วนของการใส่ข้อมูล Record -->
         <tbody>
-          <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+        <?php while ($row = mysqli_fetch_assoc($result)) { ?>
           <tr>
+         
             <td>
               <?php echo $row["type_problem_name"]; ?>
             </td>
@@ -239,20 +238,20 @@ $count = mysqli_num_rows($result);
             <td>
               <?php echo $row["id_problem"]; ?>
             </td>
+           
           </tr>
           <?php } ?>
-          
+        </tbody>
+        <tbody style="background-color: #adf2ff ;">
+          <tr style="font-size:24px; font-weight: 600; text-align: center;" >
+            <td colspan="2">รวม</td>
+
+            <td>666</td>
+            <td>777</td>
+          </tr>
         </tbody>
         <!--  สินสุด ส่วนของการใส่ข้อมูล Record -->
         </table>
-
-        <?php } else { ?>
-        <div class="alert alert-danger">
-          ไม่มีข้อมูล
-        </div>
-        <?php }
-          mysqli_close($conn); ?>
-
       </div>
 
       <!-- แสดงตารางฝั่งคำนวณ KPI-->
@@ -267,14 +266,14 @@ $count = mysqli_num_rows($result);
 
           <tbody>
             <tr>
-              <td  style="text-align:center; height:555px; font-size: 28px; background-color: #AEFDD8;"><br><br><br><br><br><br>98.45%</td>
+              <td style="text-align:center; height:555px; font-size: 28px; background-color: #AEFDD8;">
+                <br><br><br><br><br><br>98.45%</td>
             </tr>
           </tbody>
         </table>
       </div>
-
     </div>
-    </div>
+    <!-- จบ ตาราง-->
   </body>
 
 </html>
