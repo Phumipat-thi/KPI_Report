@@ -251,7 +251,7 @@ $b=777;
           <?php } ?>
         </tbody>
         <tbody style="background-color: #adf2ff ;">
-          <tr style="font-size:24px; font-weight: 600; text-align: center;">
+          <tr style="font-size:24px; font-weight: 600; text-align: center;" >
             <td colspan="2">รวม</td>
 
             <td>666</td>
