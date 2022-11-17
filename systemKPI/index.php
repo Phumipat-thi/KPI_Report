@@ -148,71 +148,77 @@ $count = mysqli_num_rows($result);
             <thead
               style="background-color: #ffb7f9b7; font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 18px; text-align: center;">
               <tr>
-                <th style="display: #;  text-align:center;">ปัญหา
+                <th style=" text-align:center;">ปัญหา
                   <!-- ปุ่ม filter และ dropdown-->
                   <div class="dropdown">
                     <button onclick="myFunction()" class="dropbtn">
+
                       <span>
                         <img src="im/6488674.png" alt="ADbanner" class="filterbutton">
                       </span>
+
                     </button>
+
+                    <!-- ส่วนของปุ่ม filter-->
+                    <form action="" method="GET">
+                      <div id="myDropdown" class="dropdown-content ">
+                        <div style="text-align:left;"> 
+                        <input type="checkbox" id="myCheck"
+                            onclick="myFunction2()">Computer&Notebook
+                          ใช้งานไม่ได้
+                          <br>
+                          <input type="checkbox" id="myCheck" onclick="myFunction2()">E-mail
+                          รับส่งใช้งานไม่ได้
+                          <br>
+                          <input type="checkbox" id="myCheck" onclick="myFunction2()">File Share
+                          ใช้งานไม่ได้
+                          <br>
+                          <input type="checkbox" id="myCheck" onclick="myFunction2()">Internet
+                          ใช้งานไม่ได้
+                          <br>
+                          <input type="checkbox" id="myCheck" onclick="myFunction2()">Service
+                          ตู้บุญเติมมีปัญหา
+                          <br>
+                          <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอเพิ่ม สิทธิ์
+                          การใช้งานระบบ
+                          <br>
+                          <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอติดตั้งโปรแกรมเพิ่มเติม
+                          <br>
+                          <input type="checkbox" id="myCheck" onclick="myFunction2()">งานโปรเจค
+                          <br>
+                          <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอยืม PC &
+                          Notebook / อุปกรณ์คอมพิวเตอร์
+                          <br>
+                          <input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา Printer /
+                          Scanner / FAX
+                          <br>
+                          <input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา
+                          ระบบโทรศัพท์ / CRM
+                          <br>
+                          <input type="checkbox" id="myCheck" onclick="myFunction2()">รีเซท / ปลดล็อค
+                          รหัสการใช้งานระบบ
+                          <br>
+                          <input type="checkbox" id="myCheck" onclick="myFunction2()">ส่งเครื่องพนักงานใหม่
+                          <br>
+                          <input type="checkbox" id="myCheck" onclick="myFunction2()">อื่น ๆ
+                          <br><input type="checkbox" id="myCheck" onclick="myFunction2()">ส่งเครื่องพนักงานใหม่
+                          <br><input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา Cenpay
+                          <br>
+
+                          <button type="submit" class="btn btn-warning" onclick="Checkingall()">ดูทั้งหมด </button>
+                          <button type="submit" class="btn btn-success">confirm</button>
+                        </div>
+
+                      </div>
+                    </form>
                 </th>
 
-                <!-- ส่วนของปุ่ม filter-->
-                <form action="" method="GET">
-                  <div id="myDropdown" class="dropdown-content ">
-
-                    <input type="checkbox" id="myCheck" onclick="myFunction2()">Computer&Notebook
-                    ใช้งานไม่ได้
-                    <br>
-                    <input type="checkbox" id="myCheck" onclick="myFunction2()">E-mail
-                    รับส่งใช้งานไม่ได้
-                    <br>
-                    <input type="checkbox" id="myCheck" onclick="myFunction2()">File Share
-                    ใช้งานไม่ได้
-                    <br>
-                    <input type="checkbox" id="myCheck" onclick="myFunction2()">Internet
-                    ใช้งานไม่ได้
-                    <br>
-                    <input type="checkbox" id="myCheck" onclick="myFunction2()">Service
-                    ตู้บุญเติมมีปัญหา
-                    <br>
-                    <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอเพิ่ม สิทธิ์
-                    การใช้งานระบบ
-                    <br>
-                    <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอติดตั้งโปรแกรมเพิ่มเติม
-                    <br>
-                    <input type="checkbox" id="myCheck" onclick="myFunction2()">งานโปรเจค
-                    <br>
-                    <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอยืม PC &
-                    Notebook / อุปกรณ์คอมพิวเตอร์
-                    <br>
-                    <input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา Printer /
-                    Scanner / FAX
-                    <br>
-                    <input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา
-                    ระบบโทรศัพท์ / CRM
-                    <br>
-                    <input type="checkbox" id="myCheck" onclick="myFunction2()">รีเซท / ปลดล็อค
-                    รหัสการใช้งานระบบ
-                    <br>
-                    <input type="checkbox" id="myCheck" onclick="myFunction2()">ส่งเครื่องพนักงานใหม่
-                    <br>
-                    <input type="checkbox" id="myCheck" onclick="myFunction2()">อื่น ๆ
-                    <br><input type="checkbox" id="myCheck" onclick="myFunction2()">ส่งเครื่องพนักงานใหม่
-                    <br><input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา Cenpay
-                    <br>
-
-                    <button type="submit" class="btn btn-warning" onclick="Checkingall()">ดูทั้งหมด </button>
-                    <button type="submit" class="btn btn-success">confirm</button>
-                  </div>
-                </form>
         </div>
         <!-- สิ้นสุด ปุ่ม filter -->
 
-        <th style="display: #;  text-align:center;">เกินเวลา</th>
-        <th style="display: #;  text-align:center;">สำเร็จตามเวลา</th>
-        <th style="display: #;  text-align:center;">จำนวน</th>
+        <th style=" text-align:center;">เกินเวลา</th>
+        <th style="  text-align:center;">สำเร็จตามเวลา</th>
+        <th style=" text-align:center;">จำนวน</th>
         </tr>
         </thead>
         <!-- สินสุด ส่วนของหัวตาราง -->
