@@ -17,9 +17,10 @@
   display: none;
   position: absolute;
   background-color: #f6f6f6;
-  min-width: 380px;
+  min-width: 430px;
   border: 1px solid #ddd;
   z-index: 1;
+  margin-top: 12px;
   /*margin-left: 155px;*/
 }
 }
@@ -43,9 +44,10 @@
   display: none;
   position: absolute;
   background-color: #ece9e9;
-  min-width: 400px;
+  min-width: 430px;
   border: 1px solid #ddd;
   z-index: 1;
+  margin-top: 12px;
   /*margin-left: 155px;*/
 }
 }
