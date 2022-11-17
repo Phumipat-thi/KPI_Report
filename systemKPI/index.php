@@ -54,10 +54,15 @@ $count = mysqli_num_rows($result);
           <a class="navbar-brand" href="#">KPI Report</a>
           <form align="left" action="#" method="post"
             style="display: inline-block; position: absolute; right: 0px; margin-top: 8px; margin-right: 10px;">
+
             <input align="center" class="btn btn-success" type="submit" value="Export file CSV." name="ext_report_it"
-              name="ext_report_it">
-            <input type="text" id="daterange" name="daterange" value="">
-            <select name="rp_type_problem" id="rp_type_problem">
+              name="ext_report_it" >
+
+
+            <input type="text" id="daterange" name="daterange" value="" style="height: 33px;" width="80px"; >
+
+            <select name="rp_type_problem" id="rp_type_problem" style="height: 33px;" width="80px"; >
+              
               <option value selected> ---- ประเภทปัญหาที่ต้องการ Export ----</option>
               <option value="1">Computer&Notebook ใช้งานไม่ได้</option>
               <option value="2">E-mail ใช้งานไม่ได้</option>
