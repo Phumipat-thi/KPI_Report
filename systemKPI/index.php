@@ -274,7 +274,7 @@ $b=777;
 
           <tbody>
             <tr>
-              <td style="text-align:center; height:608px; font-size: 28px; background-color: #AEFDD8;">
+              <td style="text-align:center; height:600px; font-size: 28px; background-color: #AEFDD8;">
                 <br><br><br><br><br><br>
                 <?php
                 $c = ($a/$b)*100;
