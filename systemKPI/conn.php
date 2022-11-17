@@ -6,8 +6,8 @@ error_reporting(~0);
 
 $serverName	  = "localhost";
 $userName	  = "root";
-$userPassword	  = "";
-$dbName	  = "test";
+$userPassword	  = "root";
+$dbName	  = "test_web_report";
 
 $conn = mysqli_connect($serverName,$userName,$userPassword,$dbName);
 

@@ -1,7 +1,7 @@
 <!--6 My Duck!!!!!!!!!!!!!!!!-->
 <?php
 require("conn.php");
-$sql = "SELECT * FROM  `report_it` WHERE 1";
+$sql = "SELECT * FROM  `type_problem` WHERE 1";
 
 
 $result = mysqli_query($conn, $sql);
@@ -25,7 +25,7 @@ $count = mysqli_num_rows($result);
   <link href="css/style.css" rel="stylesheet" />
   <script src="js/mobiscroll.javascript.min.js"></script>
   <script src="js/Drop.js"></script>
-  < </head>
+  </head>
 
 <body>
   <style>
@@ -51,15 +51,16 @@ $count = mysqli_num_rows($result);
             <option value="3">File Share ใช้งานไม่ได้</option>
             <option value="4">Internet ใช้งานไม่ได้</option>
             <option value="5">รีเซ็ท/ปลดล็อค รหัสการใช้งานระบบ</option>
-            <option value="6">ปัญหา Printer / Scanner / Fax</option>
-            <option value="7">ขอติดตั้งโปรเเกรมเพิ่มเติม</option>
-            <option value="8">ขอเพิ่ม สิทธิ์ การใช้งานระบบ</option>
-            <option value="9">ขอยืม PC&Notebook / อุปกรณ์คอมพิวเตอร์</option>
-            <option value="10">งานโปรเจ็ค</option>
-            <option value="11">Service ตู้บุญเติมมีปัญหา</option>
-            <option value="12">ปัญหา Cenpay</option>
-            <option value="13">ส่งเครื่องพนักงงานใหม่</option>
+            <option value="6">ปัญหา ระบบโทรศัพท์ / CRM</option>
+            <option value="7">ปัญหา Printer / Scanner / Fax</option>
+            <option value="9">ขอติดตั้งโปรเเกรมเพิ่มเติม</option>
+            <option value="10">ขอเพิ่ม สิทธิ์ การใช้งานระบบ</option>
+            <option value="11">ขอยืม PC&Notebook / อุปกรณ์คอมพิวเตอร์</option>
+            <option value="12">งานโปรเจ็ค</option>
+            <option value="13">Service ตู้บุญเติมมีปัญหา</option>
             <option value="14">อื่นๆ</option>
+            <option value="15">ส่งเครื่องพนักงานใหม่ </option>
+            <option value="16">ปัญหา Cenpay</option>
           </select>
         </form>
       </div>
@@ -72,7 +73,7 @@ $count = mysqli_num_rows($result);
     <font size="2" color="red">>> &nbsp; </font>
     <font size="2" color="black">
       "This information shows the potential of the people in the team. There is no right to modify the information in
-      any case.      111111111111111111111111111111111111111111111111111111111 "
+      any case. "
     </font>
   </marquee>
   <!-- end slide -->
@@ -80,7 +81,7 @@ $count = mysqli_num_rows($result);
   <!-- dropdown month&people -->
   <div class="container">
     <div class="row">
-      <div class="col-md-7">
+      <div class="col-9 col-sm-9">
         <select id="Month" name="Month"
           style="width:100%; height:max-content; font-size:24px; background-color:#FBDCE4; border-radius:8px; font-family: 'IBM Plex Sans Thai', sans-serif;">
           <option value selected> ---- เดือน ----</option>
@@ -98,7 +99,7 @@ $count = mysqli_num_rows($result);
           <option value="ธันวาคม">ธันวาคม</option>
         </select>
       </div>
-      <div class="col-md-5">
+      <div class="col-3 col-sm-3">
         <select id="NameAdmin" name="Admin"
           style="width:100% ;height:max-content; font-size:24px; background-color:#E8C8DD; border-radius:8px; font-family: 'IBM Plex Sans Thai', sans-serif;">
           <option value="1">ALL</option>
@@ -181,6 +182,8 @@ $count = mysqli_num_rows($result);
                       <input type="checkbox" id="myCheck" onclick="myFunction2()">ส่งเครื่องพนักงานใหม่
                       <br>
                       <input type="checkbox" id="myCheck" onclick="myFunction2()">อื่น ๆ
+                      <br><input type="checkbox" id="myCheck" onclick="myFunction2()">ส่งเครื่องพนักงานใหม่ 
+                      <br><input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา Cenpay
                       <br>
 
                       <button type="submit" class="btn btn-warning" onclick="Checkingall()">ดูทั้งหมด</button>
@@ -202,10 +205,16 @@ $count = mysqli_num_rows($result);
             <?php while ($row = mysqli_fetch_assoc($result)) { ?>
             <tr>
               <td>
-                <?php echo $row["rp_name"]; ?>
+                <?php echo $row["type_problem_name"]; ?>
               </td>
               <td>
-                <?php echo $row["rp_type_problem"]; ?>
+                <?php echo $row["id_problem"]; ?>
+              </td>
+              <td>
+                <?php echo $row["id_problem"]; ?>
+              </td>
+              <td>
+                <?php echo $row["id_problem"]; ?>
               </td>
             </tr>
             <?php } ?>
