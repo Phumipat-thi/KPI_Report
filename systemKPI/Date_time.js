@@ -22,7 +22,7 @@ function date_time(id)
         {
                 s = "0"+s;
         }
-        result = ' '+months[month]+' '+year+'  ' ;
+        result = ' '+months[month]+'  ' ;
         document.getElementById(id).innerHTML = result;
         setTimeout('date_time("'+id+'");','1000');
         return true;

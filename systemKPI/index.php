@@ -157,8 +157,9 @@ $count = mysqli_num_rows($result);
                       </span>
                     </button>
                     <!-- ส่วนของปุ่ม filter-->
-                    <form action="" method="GET">
-                      <div id="myDropdown" class="dropdown-content">
+                    <form action="" method="GET" >
+                      <div id="myDropdown" class="dropdown-content " >
+                        
                         <input type="checkbox" id="myCheck" onclick="myFunction2()">Computer&Notebook
                         ใช้งานไม่ได้
                         <br>
@@ -200,7 +201,7 @@ $count = mysqli_num_rows($result);
                         <br><input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา Cenpay
                         <br>
 
-                        <button type="submit" class="btn btn-warning" onclick="Checkingall()">ดูทั้งหมด</button>
+                        <button type="submit" class="btn btn-warning" onclick="Checkingall()">ดูทั้งหมด  </button>
                         <button type="submit" class="btn btn-success">confirm</button>
                       </div>
                     </form>
@@ -246,7 +247,7 @@ $count = mysqli_num_rows($result);
         </div>
 
         <!-- แสดงตารางฝั่งคำนวณ KPI-->
-        <div class="col-3 col-sm-3">
+        <div class="col-9 col-sm-3">
           <table class="table table-bordered">
             <thead
               style="background-color:greenyellow; font-family: 'IBM Plex Sans Thai', sans-serif; text-shadow: 10px; font-size: 20px;">
