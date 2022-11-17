@@ -271,7 +271,7 @@ $count = mysqli_num_rows($result);
 
           <tbody>
             <tr>
-              <td  style="text-align:center; height:608px; font-size: 28px; background-color: #AEFDD8;"><br><br><br><br><br><br>98.45%</td>
+              <td  style="text-align:center; height:599px; font-size: 28px; background-color: #AEFDD8;"><br><br><br><br><br><br>98.45%</td>
             </tr>
           </tbody>
         </table>
