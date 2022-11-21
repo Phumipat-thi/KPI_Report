@@ -1,4 +1,3 @@
-<!--6 My Duck!!!!!!!!!!!!!!!!-->
 <?php
 require("conn.php");
 $sql = "SELECT * FROM  `type_problem` WHERE 1";
@@ -10,7 +9,41 @@ $count = mysqli_num_rows($result);
 $a = 666;
 $b = 777;
 ?>
+<?php if (isset($_POST['exp_report_it'])) {
 
+$ex = explode('-', $_POST['daterange']);
+$date_start = str_replace('/', '-', trim($ex[0]));
+$date_end = str_replace('/', '-', trim($ex[1]));
+header('Content-Type: text/csv; charset=utf-8');
+header('Content-Disposition: attachment; filename=report_it.csv');
+$output = fopen('php://output', 'w');
+fprintf($output, chr(0xEF) . chr(0xBB) . chr(0xBF));
+fputcsv($output, array('ลำดับ', 'รหัสงาน', 'รหัสพนักงาน', 'ชื่อผู้แจ้ง', 'นามสกุลผู้แจ้ง', 'ฝ่าย', 'อีเมล์ผู้แจ้ง', 'เบอร์โทรโต๊ะ', 'ประเภทปัญหา', 'วันที่แจ้ง', 'วันที่ดำเนินการ', 'วันที่ปิดงาน', 'จำนวนเวลาที่ใช้', 'SLA', 'รายละเอียดเพิ่มเติม', 'การแก้ไขปัญหา', 'ผู้รับผิดชอบ', 'สถานะ', 'ความคิดเห็น', 'ความพึงพอใจ', 'ผู้แจ้งปิดงาน', 'รับ Call CC', 'ตอบ Line CC', 'แจ้ง Line ตัวแทน', 'แจ้งสาเหตุปัญหา', 'รายละเอียดของปัญหา', 'แจ้ง Line CC ปิดงาน', 'แจ้ง Line ตัวแทน ปิดงาน'));
+
+
+
+if (empty($_POST['rp_type_problem'])) {
+  $SQL = "SELECT A.id, rp_order_id, rp_id_emp, rp_name, rp_surname, C.department_name, rp_email, rp_desk_phone, D.type_problem_name, rp_start_job, rp_pending_job, rp_success_job, rp_sumdate_job, rp_sla_job, rp_desc, rp_solve, rp_personnel_closed, rp_status, B.rp_comment, B.rp_feedback, B.rp_id_order, cc_report,cc_respond,report_agent,cc_problem_time,cc_problem,cc_closed,agent_closed ";
+  $SQL = $SQL . "FROM report_it A LEFT JOIN comment B ON (A.rp_order_id = B.rp_id_order) INNER JOIN department C ON (A.rp_dep = C.id_department) INNER JOIN type_problem D ON (A.rp_type_problem = D.id_problem) WHERE rp_start_job BETWEEN ' " . $date_start . " 'AND' " . $date_end . "' ";
+  $SQL = $SQL . "GROUP BY rp_order_id ORDER BY A.id DESC";
+  $rows = mysqli_query($conn, $SQL);
+} else {
+  $SQL = "SELECT A.id, rp_order_id, rp_id_emp, rp_name, rp_surname, C.department_name, rp_email, rp_desk_phone, D.type_problem_name, rp_start_job, rp_pending_job, rp_success_job, rp_sumdate_job, rp_sla_job, rp_desc, rp_solve, rp_personnel_closed, rp_status, B.rp_comment, B.rp_feedback, B.rp_id_order, cc_report,cc_respond,report_agent,cc_problem_time,cc_problem,cc_closed,agent_closed ";
+  $SQL = $SQL . "FROM report_it A LEFT JOIN comment B ON (A.rp_order_id = B.rp_id_order) INNER JOIN department C ON (A.rp_dep = C.id_department) INNER JOIN type_problem D ON (A.rp_type_problem = D.id_problem) WHERE a.rp_type_problem ='" . $_POST['rp_type_problem'] . "' AND rp_start_job BETWEEN ' " . $date_start . " 'AND' " . $date_end . "' ";
+  $SQL = $SQL . "GROUP BY rp_order_id ORDER BY A.id DESC";
+  $rows = mysqli_query($conn, $SQL);
+}
+
+// print_r( $SQL); exit();
+while ($row = mysqli_fetch_assoc($rows)) {
+  fputcsv($output, $row);
+}
+fclose($output);
+mysqli_close($conn);
+exit();
+
+}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
@@ -62,12 +95,12 @@ $b = 777;
         <form align="left" action="#" method="post"
           style="display: inline-block; position: absolute; right: 0px; margin-top: 8px; margin-right: 10px;">
 
-          <input align="center" class="btn btn-success" type="submit" value="Export file CSV." name="ext_report_it"
-            name="ext_report_it" >
+          <input align="center" class="btn btn-success" type="submit" value="Export file CSV." id="exp_report_it"
+            name="exp_report_it" >
             
 
 
-          <input type="text" name="daterange" value="01/01/2022 - 01/15/2022" style="height: 33px;" width="80px" ; >
+          <input type="text" name="daterange" value="#" style="height: 33px;" width="80px" ;> 
 
           <select name="rp_type_problem" id="rp_type_problem" style="height: 33px;" width="80px" ;>
 
