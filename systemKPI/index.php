@@ -2,8 +2,7 @@
 require("conn.php");
 $sql = "SELECT * FROM  `type_problem` WHERE 1";
 
-
-$result = mysqli_query($conn, $sql);
+$result = mysqli_query($con, $sql);
 $count = mysqli_num_rows($result);
 
 $a = 666;
@@ -26,12 +25,12 @@ if (empty($_POST['rp_type_problem'])) {
   $SQL = "SELECT A.id, rp_order_id, rp_id_emp, rp_name, rp_surname, C.department_name, rp_email, rp_desk_phone, D.type_problem_name, rp_start_job, rp_pending_job, rp_success_job, rp_sumdate_job, rp_sla_job, rp_desc, rp_solve, rp_personnel_closed, rp_status, B.rp_comment, B.rp_feedback, B.rp_id_order, cc_report,cc_respond,report_agent,cc_problem_time,cc_problem,cc_closed,agent_closed ";
   $SQL = $SQL . "FROM report_it A LEFT JOIN comment B ON (A.rp_order_id = B.rp_id_order) INNER JOIN department C ON (A.rp_dep = C.id_department) INNER JOIN type_problem D ON (A.rp_type_problem = D.id_problem) WHERE rp_start_job BETWEEN ' " . $date_start . " 'AND' " . $date_end . "' ";
   $SQL = $SQL . "GROUP BY rp_order_id ORDER BY A.id DESC";
-  $rows = mysqli_query($conn, $SQL);
+  $rows = mysqli_query($con, $SQL);
 } else {
   $SQL = "SELECT A.id, rp_order_id, rp_id_emp, rp_name, rp_surname, C.department_name, rp_email, rp_desk_phone, D.type_problem_name, rp_start_job, rp_pending_job, rp_success_job, rp_sumdate_job, rp_sla_job, rp_desc, rp_solve, rp_personnel_closed, rp_status, B.rp_comment, B.rp_feedback, B.rp_id_order, cc_report,cc_respond,report_agent,cc_problem_time,cc_problem,cc_closed,agent_closed ";
   $SQL = $SQL . "FROM report_it A LEFT JOIN comment B ON (A.rp_order_id = B.rp_id_order) INNER JOIN department C ON (A.rp_dep = C.id_department) INNER JOIN type_problem D ON (A.rp_type_problem = D.id_problem) WHERE a.rp_type_problem ='" . $_POST['rp_type_problem'] . "' AND rp_start_job BETWEEN ' " . $date_start . " 'AND' " . $date_end . "' ";
   $SQL = $SQL . "GROUP BY rp_order_id ORDER BY A.id DESC";
-  $rows = mysqli_query($conn, $SQL);
+  $rows = mysqli_query($con, $SQL);
 }
 
 // print_r( $SQL); exit();
@@ -39,7 +38,7 @@ while ($row = mysqli_fetch_assoc($rows)) {
   fputcsv($output, $row);
 }
 fclose($output);
-mysqli_close($conn);
+mysqli_close($con);
 exit();
 
 }
@@ -51,7 +50,7 @@ exit();
 
 <head>
   <title>KPI Report</title>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap" rel="stylesheet">
@@ -66,15 +65,27 @@ exit();
   <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
   <script>
-    $(function () {
+    /*$(function () {
       $('input[name="daterange"]').daterangepicker({
         opens: 'left'
       }, function (start, end, label) {
-        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' +
-          end.format('YYYY-MM-DD'));
+        console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' to ' +
+          end.format('DD-MM-YYYY'));
       });
-    });
+    });*/
+
+    $(function() {
+  $('input[name="datetimes"]').daterangepicker({
+    timePicker: false,
+    // startDate: moment().startOf('hour'),
+    // endDate: moment().startOf('hour').add(32, 'hour'),
+    locale: {
+      format: 'YYYY/MM/DD '
+    }
+  });
+});
   </script>
   <!--END-DateRangePicker-->
 
@@ -92,19 +103,16 @@ exit();
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">KPI Report</a>
-        <form align="left" action="#" method="post"
+        <form align="left" action="Func_Exportcsv.php" method="post"
           style="display: inline-block; position: absolute; right: 0px; margin-top: 8px; margin-right: 10px;">
 
-          <input align="center" class="btn btn-success" type="submit" value="Export file CSV." id="exp_report_it"
-            name="exp_report_it" >
-            
-
-
-          <input type="text" name="daterange" value="#" style="height: 33px;" width="80px" ;> 
+          <button class="btn btn-success" value="Export file CSV." type="submit"> Export file CSV.</button>
+          
+          <input type="text" name="datetimes" value="datetimes" style="height: 33px;" width="80px"/>
+          <!-- <input type="text" name="daterange" value="daterange" style="height: 33px;" width="80px" ;>  -->
 
           <select name="rp_type_problem" id="rp_type_problem" style="height: 33px;" width="80px" ;>
-
-            <option value selected> ---- ประเภทปัญหาที่ต้องการ Export ----</option>
+            <option name="TP" value selected> ---- ประเภทปัญหาที่ต้องการ Export ----</option>
             <option value="1">Computer&Notebook ใช้งานไม่ได้</option>
             <option value="2">E-mail ใช้งานไม่ได้</option>
             <option value="3">File Share ใช้งานไม่ได้</option>
@@ -144,7 +152,7 @@ exit();
       <div class="col-9 col-sm-9">
         <select id="Month" name="Month"
           style="width:100%; height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
-          <option value selected> ---- เดือน ----</option>
+          <option value selected> ------ทั้งปี----- </option>
           <option value="มกราคม">มกราคม</option>
           <option value="กุมภาพันธ์">กุมภาพันธ์</option>
           <option value="มีนาคม">มีนาคม</option>

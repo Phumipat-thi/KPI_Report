@@ -7,10 +7,10 @@ error_reporting(~0);
 $serverName	  = "localhost";
 $userName	  = "root";
 $userPassword	  = "root";
-$dbName	  = "web_report";
+$dbName	  = "test_web_report";
 
 
-$conn = mysqli_connect($serverName,$userName,$userPassword,$dbName);
+$con = mysqli_connect($serverName,$userName,$userPassword,$dbName);
 
 ; 
 
