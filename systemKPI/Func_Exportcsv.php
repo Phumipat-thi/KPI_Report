@@ -18,7 +18,7 @@ if(empty($_POST['rp_type_problem'])){
  
 if($query->num_rows > 0){ 
     $delimiter = ","; 
-    $filename = "members-data_" .$date_start."vvv".$date_end."vvv" .$probType. ".csv"; 
+    $filename = "report_it.csv"; 
      
     // Create a file pointer 
     $f = fopen('php://memory', 'w');   
