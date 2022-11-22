@@ -273,9 +273,10 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
       </div>
       <!-- สิ้นสุด ปุ่ม filter -->
 
-      <th style=" text-align:center;">เกินเวลา</th>
-      <th style="  text-align:center;">สำเร็จตามเวลา</th>
-      <th style=" text-align:center;">จำนวน</th>
+      <th style=" text-align:center;">ผ่าน</th>
+      <th style="  text-align:center;">ไม่ผ่าน</th>
+      <th style=" text-align:center;">No Sla</th>
+      <th style=" text-align:center;">ผลรวม</th>
       </tr>
       </thead>
       <!-- สินสุด ส่วนของหัวตาราง -->
@@ -297,16 +298,24 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
           <td>
             <?php echo $row["id_problem"]; ?>
           </td>
+          <td>
+            <?php echo $row["id_problem"]; ?>
+          </td>
+
 
         </tr>
         <?php } ?>
       </tbody>
       <tbody style="background-color:black ; color:white; ">
-        <tr style="font-size:18px; font-weight: 600; text-align: center;">
-          <td colspan="2">รวม</td>
+        <tr style="font-size:18px; font-weight: 600; text-align: center;" >
+          <td colspan="">รวม</td>
 
           <td>666</td>
           <td>777</td>
+          <td>777</td>
+          <td>777</td>
+          
+
         </tr>
       </tbody>
       <!--  สินสุด ส่วนของการใส่ข้อมูล Record -->
