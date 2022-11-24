@@ -55,7 +55,7 @@ $months[12] = 'ธันวาคม';
 
 <head>
   <title>KPI Report</title>
-  <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap" rel="stylesheet">
@@ -287,7 +287,7 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
       <th style=" text-align:center;">ผ่าน</th>
       <th style="  text-align:center;">ไม่ผ่าน</th>
       <th style=" text-align:center;">No Sla</th>
-      <th style=" text-align:center;">ไม่ทราบค่า</th>
+      <th style=" text-align:center;">Null</th>
       <th style=" text-align:center;">ผลรวม</th>
       </tr>
       </thead>
@@ -376,15 +376,15 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
             <?php 
     $SSuc= "SELECT * FROM report_it WHERE rp_sla_job like 'No SLA' ;";
     $result = mysqli_query($con, $SSuc);
-    $data=mysqli_num_rows($result);
-    echo $data;?>
+    $NSdata=mysqli_num_rows($result);
+    echo $NSdata;?>
     </td>
     <td>
             <?php 
     $SSuc= "SELECT * FROM report_it WHERE rp_sla_job like '' ;";
     $result = mysqli_query($con, $SSuc);
-    $data=mysqli_num_rows($result);
-    echo $data;?>
+    $Nudata=mysqli_num_rows($result);
+    echo $Nudata;?>
     </td>
           <td>
             <?php 
@@ -416,7 +416,8 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
             <td style="text-align:center; height:600px; font-size: 28px; background-color: #AEFDD8;">
               <br><br><br><br><br><br>
               <?php
-                            $KPI = ($sucdata / $Adata) * 100;
+                            $AA = $Adata - ($NSdata + $Nudata);
+                            $KPI = ($sucdata / $AA) * 100;
                             $ans = number_format($KPI, 2);
                             echo "$ans" . "%";
                             ?>
