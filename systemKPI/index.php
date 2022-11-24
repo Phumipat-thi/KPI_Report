@@ -1,42 +1,61 @@
 <?php
+require("conn.php");
+$sql = "SELECT * FROM  `type_problem` WHERE 1";
+
+$result = mysqli_query($con, $sql);
+$count = mysqli_num_rows($result);
+
 $a = 666;
 $b = 777;
 ?>
+<?php if (isset($_POST['exp_report_it'])) {
 
-<?php 
-// if (isset($_POST['exp_report_it'])) {
+$ex = explode('-', $_POST['daterange']);
+$date_start = str_replace('/', '-', trim($ex[0]));
+$date_end = str_replace('/', '-', trim($ex[1]));
+header('Content-Type: text/csv; charset=utf-8');
+header('Content-Disposition: attachment; filename=report_it.csv');
+$output = fopen('php://output', 'w');
+fprintf($output, chr(0xEF) . chr(0xBB) . chr(0xBF));
+fputcsv($output, array('ลำดับ', 'รหัสงาน', 'รหัสพนักงาน', 'ชื่อผู้แจ้ง', 'นามสกุลผู้แจ้ง', 'ฝ่าย', 'อีเมล์ผู้แจ้ง', 'เบอร์โทรโต๊ะ', 'ประเภทปัญหา', 'วันที่แจ้ง', 'วันที่ดำเนินการ', 'วันที่ปิดงาน', 'จำนวนเวลาที่ใช้', 'SLA', 'รายละเอียดเพิ่มเติม', 'การแก้ไขปัญหา', 'ผู้รับผิดชอบ', 'สถานะ', 'ความคิดเห็น', 'ความพึงพอใจ', 'ผู้แจ้งปิดงาน', 'รับ Call CC', 'ตอบ Line CC', 'แจ้ง Line ตัวแทน', 'แจ้งสาเหตุปัญหา', 'รายละเอียดของปัญหา', 'แจ้ง Line CC ปิดงาน', 'แจ้ง Line ตัวแทน ปิดงาน'));
 
-// $ex = explode('-', $_POST['daterange']);
-// $date_start = str_replace('/', '-', trim($ex[0]));
-// $date_end = str_replace('/', '-', trim($ex[1]));
-// header('Content-Type: text/csv; charset=utf-8');
-// header('Content-Disposition: attachment; filename=report_it.csv');
-// $output = fopen('php://output', 'w');
-// fprintf($output, chr(0xEF) . chr(0xBB) . chr(0xBF));
-// fputcsv($output, array('ลำดับ', 'รหัสงาน', 'รหัสพนักงาน', 'ชื่อผู้แจ้ง', 'นามสกุลผู้แจ้ง', 'ฝ่าย', 'อีเมล์ผู้แจ้ง', 'เบอร์โทรโต๊ะ', 'ประเภทปัญหา', 'วันที่แจ้ง', 'วันที่ดำเนินการ', 'วันที่ปิดงาน', 'จำนวนเวลาที่ใช้', 'SLA', 'รายละเอียดเพิ่มเติม', 'การแก้ไขปัญหา', 'ผู้รับผิดชอบ', 'สถานะ', 'ความคิดเห็น', 'ความพึงพอใจ', 'ผู้แจ้งปิดงาน', 'รับ Call CC', 'ตอบ Line CC', 'แจ้ง Line ตัวแทน', 'แจ้งสาเหตุปัญหา', 'รายละเอียดของปัญหา', 'แจ้ง Line CC ปิดงาน', 'แจ้ง Line ตัวแทน ปิดงาน'));
 
-// if (empty($_POST['rp_type_problem'])) {
-//   $SQL = "SELECT A.id, rp_order_id, rp_id_emp, rp_name, rp_surname, C.department_name, rp_email, rp_desk_phone, D.type_problem_name, rp_start_job, rp_pending_job, rp_success_job, rp_sumdate_job, rp_sla_job, rp_desc, rp_solve, rp_personnel_closed, rp_status, B.rp_comment, B.rp_feedback, B.rp_id_order, cc_report,cc_respond,report_agent,cc_problem_time,cc_problem,cc_closed,agent_closed ";
-//   $SQL = $SQL . "FROM report_it A LEFT JOIN comment B ON (A.rp_order_id = B.rp_id_order) INNER JOIN department C ON (A.rp_dep = C.id_department) INNER JOIN type_problem D ON (A.rp_type_problem = D.id_problem) WHERE rp_start_job BETWEEN ' " . $date_start . " 'AND' " . $date_end . "' ";
-//   $SQL = $SQL . "GROUP BY rp_order_id ORDER BY A.id DESC";
-//   $rows = mysqli_query($con, $SQL);
-// } else {
-//   $SQL = "SELECT A.id, rp_order_id, rp_id_emp, rp_name, rp_surname, C.department_name, rp_email, rp_desk_phone, D.type_problem_name, rp_start_job, rp_pending_job, rp_success_job, rp_sumdate_job, rp_sla_job, rp_desc, rp_solve, rp_personnel_closed, rp_status, B.rp_comment, B.rp_feedback, B.rp_id_order, cc_report,cc_respond,report_agent,cc_problem_time,cc_problem,cc_closed,agent_closed ";
-//   $SQL = $SQL . "FROM report_it A LEFT JOIN comment B ON (A.rp_order_id = B.rp_id_order) INNER JOIN department C ON (A.rp_dep = C.id_department) INNER JOIN type_problem D ON (A.rp_type_problem = D.id_problem) WHERE a.rp_type_problem ='" . $_POST['rp_type_problem'] . "' AND rp_start_job BETWEEN ' " . $date_start . " 'AND' " . $date_end . "' ";
-//   $SQL = $SQL . "GROUP BY rp_order_id ORDER BY A.id DESC";
-//   $rows = mysqli_query($con, $SQL);
-// }
+
+if (empty($_POST['rp_type_problem'])) {
+  $SQL = "SELECT A.id, rp_order_id, rp_id_emp, rp_name, rp_surname, C.department_name, rp_email, rp_desk_phone, D.type_problem_name, rp_start_job, rp_pending_job, rp_success_job, rp_sumdate_job, rp_sla_job, rp_desc, rp_solve, rp_personnel_closed, rp_status, B.rp_comment, B.rp_feedback, B.rp_id_order, cc_report,cc_respond,report_agent,cc_problem_time,cc_problem,cc_closed,agent_closed ";
+  $SQL = $SQL . "FROM report_it A LEFT JOIN comment B ON (A.rp_order_id = B.rp_id_order) INNER JOIN department C ON (A.rp_dep = C.id_department) INNER JOIN type_problem D ON (A.rp_type_problem = D.id_problem) WHERE rp_start_job BETWEEN ' " . $date_start . " 'AND' " . $date_end . "' ";
+  $SQL = $SQL . "GROUP BY rp_order_id ORDER BY A.id DESC";
+  $rows = mysqli_query($con, $SQL);
+} else {
+  $SQL = "SELECT A.id, rp_order_id, rp_id_emp, rp_name, rp_surname, C.department_name, rp_email, rp_desk_phone, D.type_problem_name, rp_start_job, rp_pending_job, rp_success_job, rp_sumdate_job, rp_sla_job, rp_desc, rp_solve, rp_personnel_closed, rp_status, B.rp_comment, B.rp_feedback, B.rp_id_order, cc_report,cc_respond,report_agent,cc_problem_time,cc_problem,cc_closed,agent_closed ";
+  $SQL = $SQL . "FROM report_it A LEFT JOIN comment B ON (A.rp_order_id = B.rp_id_order) INNER JOIN department C ON (A.rp_dep = C.id_department) INNER JOIN type_problem D ON (A.rp_type_problem = D.id_problem) WHERE a.rp_type_problem ='" . $_POST['rp_type_problem'] . "' AND rp_start_job BETWEEN ' " . $date_start . " 'AND' " . $date_end . "' ";
+  $SQL = $SQL . "GROUP BY rp_order_id ORDER BY A.id DESC";
+  $rows = mysqli_query($con, $SQL);
+}
 
 // print_r( $SQL); exit();
-// while ($row = mysqli_fetch_assoc($rows)) {
-//   fputcsv($output, $row);
-// }
-// fclose($output);
-// mysqli_close($con);
-// exit();
+while ($row = mysqli_fetch_assoc($rows)) {
+  fputcsv($output, $row);
+}
+fclose($output);
+mysqli_close($con);
+exit();
+
+}
+$months[1] = 'มกราคม';
+$months[2] = 'กุมภาพันธ์';
+$months[3] = 'มีนาคม';
+$months[4] = 'เมษายน';
+$months[5] = 'พฤษภาคม';
+$months[6] = 'มิถุนายน';
+$months[7] = 'กรกฎาคม';
+$months[8] = 'สิงหาคม';
+$months[9] = 'กันยายน';
+$months[10] = 'ตุลาคม';
+$months[11] = 'พฤศจิกายน';
+$months[12] = 'ธันวาคม';
 
 ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
@@ -61,7 +80,6 @@ $b = 777;
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
   <script>
-    // DateRangePicker เอามาจาก 'https://www.daterangepicker.com/'  
     /*$(function () {
       $('input[name="daterange"]').daterangepicker({
         opens: 'left'
@@ -145,10 +163,16 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
   <div class="container">
     <div class="row">
       <div class="col-9 col-sm-9">
-        <select id="Month" name="Month"
-          style="width:100%; height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
-          <option value selected> ------ทั้งปี----- </option>
-          <option value="มกราคม">มกราคม</option>
+      <select id="Month" name="Month" style="width:100%; height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
+                        <option value=""> ------ทั้งปี----- </option>
+                        <?php
+                            for ($i = 1; $i <= 12; $i++) {
+                        ?>
+                            <option value="<?php echo $months[$i]; ?>" <?php if ($i == date('m')) { echo "selected";  } ?>>
+                            <?php echo $months[$i]; ?>
+                            </option>
+                        <?php } ?>
+          <!-- <option value="มกราคม">มกราคม</option>
           <option value="กุมภาพันธ์">กุมภาพันธ์</option>
           <option value="มีนาคม">มีนาคม</option>
           <option value="เมษายน">เมษายน</option>
@@ -159,8 +183,8 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
           <option value="กันยายน">กันยายน</option>
           <option value="ตุลาคม">ตุลาคม</option>
           <option value="พฤศจิกายน">พฤศจิกายน</option>
-          <option value="ธันวาคม">ธันวาคม</option>
-        </select>
+          <option value="ธันวาคม">ธันวาคม</option> -->
+      </select>
 
       </div>
       <div class="col-3 col-sm-3">
@@ -278,89 +302,37 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
 
       <!-- ส่วนของการใส่ข้อมูล Record -->
       <tbody>
-        <?php 
-        require ("conn.php");
-        $sql = " SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem GROUP BY rp_type_problem; ";
-        
-        $Loopresult = mysqli_query($con, $sql);
-
-        while ($row = mysqli_fetch_array($Loopresult)) { ?>
+        <?php while ($row = mysqli_fetch_assoc($result)) { ?>
         <tr>
-          <td>
-            <?php
-  echo $row["type_problem_name"];
-  $r = $row["rp_type_problem"];
-    ?>
-          </td>
-          
-          <td>
-          <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ผ่าน' ;";
-    $result = mysqli_query($con, $SSuc);
-    $data=mysqli_num_rows($result);
-    echo $data;?>
-          </td>
 
           <td>
-          <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ไม่ผ่าน' ;";
-    $result = mysqli_query($con, $SSuc);
-    $data=mysqli_num_rows($result);
-    echo $data;?>
+            <?php echo $row["type_problem_name"]; ?>
+          </td>
+          <td>
+            <?php echo $row["id_problem"]; ?>
+          </td>
+          <td>
+            <?php echo $row["id_problem"]; ?>
+          </td>
+          <td>
+            <?php echo $row["id_problem"]; ?>
+          </td>
+          <td>
+            <?php echo $row["id_problem"]; ?>
           </td>
 
-          <td>
-          <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND (rp_sla_job like 'No SLA' OR rp_sla_job like '') ;";
-    $result = mysqli_query($con, $SSuc);
-    $data=mysqli_num_rows($result);
-    echo $data;?>
-          </td>
-          
-          <td>
-          <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' ;";
-    $result = mysqli_query($con, $SSuc);
-    $data=mysqli_num_rows($result);
-    echo $data;?>
-          </td>
 
         </tr>
-         <?php } ?>
-
+        <?php } ?>
       </tbody>
       <tbody style="background-color:black ; color:white; ">
         <tr style="font-size:18px; font-weight: 600; text-align: center;" >
           <td colspan="">รวม</td>
 
-          <td>
-            <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_sla_job like 'ผ่าน' ;";
-    $result = mysqli_query($con, $SSuc);
-    $sucdata=mysqli_num_rows($result);
-    echo $sucdata;?>
-    </td>
-          <td>
-            <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_sla_job like 'ไม่ผ่าน' ;";
-    $result = mysqli_query($con, $SSuc);
-    $data=mysqli_num_rows($result);
-    echo $data;?>
-    </td>
-          <td>
-            <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_sla_job like 'No SLA' OR rp_sla_job like '' ;";
-    $result = mysqli_query($con, $SSuc);
-    $data=mysqli_num_rows($result);
-    echo $data;?>
-    </td>
-          <td>
-            <?php 
-    $SSuc= "SELECT * FROM report_it WHERE 1 ;";
-    $result = mysqli_query($con, $SSuc);
-    $Adata=mysqli_num_rows($result);
-    echo $Adata;?>
-    </td>
+          <td>666</td>
+          <td>777</td>
+          <td>777</td>
+          <td>777</td>
           
 
         </tr>
@@ -384,8 +356,8 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
             <td style="text-align:center; height:600px; font-size: 28px; background-color: #AEFDD8;">
               <br><br><br><br><br><br>
               <?php
-                            $KPI = ($sucdata / $Adata) * 100;
-                            $ans = number_format($KPI, 2);
+                            $c = ($a / $b) * 100;
+                            $ans = number_format($c, 2);
                             echo "$ans" . "%";
                             ?>
             </td>
