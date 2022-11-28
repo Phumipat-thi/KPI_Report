@@ -216,7 +216,7 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
               <th style=" text-align:center;">ปัญหา
                 <!-- ปุ่ม filter และ dropdown-->
                 <div class="dropdown">
-                  <button onclick="myFunction()" class="dropbtn">
+                  <button onclick="filterfunc()" class="dropbtn">
 
                     <span>
                       <img src="im/6488674.png" alt="ADbanner" class="filterbutton">
@@ -225,55 +225,53 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
                   </button>
 
                   <!-- ส่วนของปุ่ม filter-->
-                  <form action="" method="GET">
+                  <form name="myform" action="checkboxes.asp" method="POST">
                     <div id="myDropdown" class="dropdown-content ">
                       <div style="text-align:left;">
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">Computer&Notebook
+                        <input type="checkbox" name="check_list" value="1" >Computer&Notebook
                         ใช้งานไม่ได้
                         <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">E-mail
+                        <input type="checkbox" name="check_list" value="2" >E-mail
                         รับส่งใช้งานไม่ได้
                         <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">File Share
+                        <input type="checkbox" name="check_list" value="3" >File Share
                         ใช้งานไม่ได้
                         <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">Internet
+                        <input type="checkbox" name="check_list" value="4" >Internet
                         ใช้งานไม่ได้
                         <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">Service
+                        <input type="checkbox" name="check_list" value="5">Service
                         ตู้บุญเติมมีปัญหา
                         <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอเพิ่ม
+                        <input type="checkbox" name="check_list" value="6" >ขอเพิ่ม
                         สิทธิ์
                         การใช้งานระบบ
                         <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอติดตั้งโปรแกรมเพิ่มเติม
+                        <input type="checkbox" name="check_list" value="7" >ขอติดตั้งโปรแกรมเพิ่มเติม
                         <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">งานโปรเจค
+                        <input type="checkbox" name="check_list" value="9"  >งานโปรเจค
                         <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">ขอยืม PC &
+                        <input type="checkbox" name="check_list" value="10"  >ขอยืม PC &
                         Notebook / อุปกรณ์คอมพิวเตอร์
                         <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา
+                        <input type="checkbox" name="check_list" value="11"  >ปัญหา
                         Printer /
                         Scanner / FAX
                         <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา
+                        <input type="checkbox" name="check_list" value="12" >ปัญหา
                         ระบบโทรศัพท์ / CRM
                         <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">รีเซท /
-                        ปลดล็อค
-                        รหัสการใช้งานระบบ
+                        <input type="checkbox" name="check_list" value="13" >รีเซท /
+                        ปลดล็อครหัสการใช้งานระบบ
                         <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">ส่งเครื่องพนักงานใหม่
+                        <input type="checkbox" name="check_list" value="14" >ส่งเครื่องพนักงานใหม่
                         <br>
-                        <input type="checkbox" id="myCheck" onclick="myFunction2()">อื่น ๆ
-                        <br><input type="checkbox" id="myCheck" onclick="myFunction2()">ส่งเครื่องพนักงานใหม่
-                        <br><input type="checkbox" id="myCheck" onclick="myFunction2()">ปัญหา
+                        <input type="checkbox" name="check_list" value="15" >อื่น ๆ
+                        <br><input type="checkbox" id="myCheck"name="check_list" value="16"  >ปัญหา
                         Cenpay
                         <br>
-
-                        <button type="submit" class="btn btn-warning" onclick="Checkingall()">ดูทั้งหมด </button>
+                        <input type="button" class="btn btn-warning" name="Check_All" value="Check All" onClick="Check(document.myform.check_list)">
+                        <!-- <button class="btn btn-warning" onclick="Checkingall()" id="allcheck">ดูทั้งหมด </button> -->
                         <button type="submit" class="btn btn-success">confirm</button>
                       </div>
 
@@ -294,110 +292,8 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
       <!-- สินสุด ส่วนของหัวตาราง -->
 
       <!-- ส่วนของการใส่ข้อมูล Record -->
-      <tbody>
-        <?php 
-        require ("conn.php");
-        $sql = " SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem GROUP BY rp_type_problem; ";
-        
-        $Loopresult = mysqli_query($con, $sql);
-
-        while ($row = mysqli_fetch_array($Loopresult)) { ?>
-        <tr>
-          <td>
-            <?php
-  echo $row["type_problem_name"];
-  $r = $row["rp_type_problem"];
-    ?>
-          </td>
-          
-          <td>
-          <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ผ่าน' ;";
-    $result = mysqli_query($con, $SSuc);
-    $data=mysqli_num_rows($result);
-    echo $data;?>
-          </td>
-
-          <td>
-          <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ไม่ผ่าน' ;";
-    $result = mysqli_query($con, $SSuc);
-    $data=mysqli_num_rows($result);
-    echo $data;?>
-          </td>
-
-          <td>
-          <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'No SLA'  ;";
-    $result = mysqli_query($con, $SSuc);
-    $data=mysqli_num_rows($result);
-    echo $data;?>
-          </td>
-          
-          <td>
-          <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like ''  ;";
-    $result = mysqli_query($con, $SSuc);
-    $data=mysqli_num_rows($result);
-    echo $data;?>
-          </td>
-          
-          <td>
-          <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' ;";
-    $result = mysqli_query($con, $SSuc);
-    $data=mysqli_num_rows($result);
-    echo $data;?>
-          </td>
-
-        </tr>
-         <?php } ?>
-
-      </tbody>
-      <tbody style="background-color:black ; color:white; ">
-        <tr style="font-size:18px; font-weight: 600; text-align: center;" >
-          <td colspan="">รวม</td>
-
-          <td>
-            <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_sla_job like 'ผ่าน' ;";
-    $result = mysqli_query($con, $SSuc);
-    $sucdata=mysqli_num_rows($result);
-    echo $sucdata;?>
-    </td>
-          <td>
-            <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_sla_job like 'ไม่ผ่าน' ;";
-    $result = mysqli_query($con, $SSuc);
-    $data=mysqli_num_rows($result);
-    echo $data;?>
-    </td>
-          <td>
-            <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_sla_job like 'No SLA' ;";
-    $result = mysqli_query($con, $SSuc);
-    $NSdata=mysqli_num_rows($result);
-    echo $NSdata;?>
-    </td>
-    <td>
-            <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_sla_job like '' ;";
-    $result = mysqli_query($con, $SSuc);
-    $Nudata=mysqli_num_rows($result);
-    echo $Nudata;?>
-    </td>
-          <td>
-            <?php 
-    $SSuc= "SELECT * FROM report_it WHERE 1 ;";
-    $result = mysqli_query($con, $SSuc);
-    $Adata=mysqli_num_rows($result);
-    echo $Adata;?>
-    </td>
-          
-
-        </tr>
-      </tbody>
-      <!--  สินสุด ส่วนของการใส่ข้อมูล Record -->
+      <?php include("TB_ALL.php") ;?>
+        <!--  สินสุด ส่วนของการใส่ข้อมูล Record -->
       </table>
     </div>
 

@@ -6,7 +6,7 @@ error_reporting(~0);
 
 $serverName	  = "localhost";
 $userName	  = "root";
-$userPassword	  = "root";
+$userPassword	  = "";
 $dbName	  = "test_web_report";
 
 
