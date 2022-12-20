@@ -2,38 +2,8 @@
 $a = 666;
 $b = 777;
 ?>
-<?php 
-// if (isset($_POST['exp_report_it'])) {
+<?php
 
-// $ex = explode('-', $_POST['daterange']);
-// $date_start = str_replace('/', '-', trim($ex[0]));
-// $date_end = str_replace('/', '-', trim($ex[1]));
-// header('Content-Type: text/csv; charset=utf-8');
-// header('Content-Disposition: attachment; filename=report_it.csv');
-// $output = fopen('php://output', 'w');
-// fprintf($output, chr(0xEF) . chr(0xBB) . chr(0xBF));
-// fputcsv($output, array('ลำดับ', 'รหัสงาน', 'รหัสพนักงาน', 'ชื่อผู้แจ้ง', 'นามสกุลผู้แจ้ง', 'ฝ่าย', 'อีเมล์ผู้แจ้ง', 'เบอร์โทรโต๊ะ', 'ประเภทปัญหา', 'วันที่แจ้ง', 'วันที่ดำเนินการ', 'วันที่ปิดงาน', 'จำนวนเวลาที่ใช้', 'SLA', 'รายละเอียดเพิ่มเติม', 'การแก้ไขปัญหา', 'ผู้รับผิดชอบ', 'สถานะ', 'ความคิดเห็น', 'ความพึงพอใจ', 'ผู้แจ้งปิดงาน', 'รับ Call CC', 'ตอบ Line CC', 'แจ้ง Line ตัวแทน', 'แจ้งสาเหตุปัญหา', 'รายละเอียดของปัญหา', 'แจ้ง Line CC ปิดงาน', 'แจ้ง Line ตัวแทน ปิดงาน'));
-
-// if (empty($_POST['rp_type_problem'])) {
-//   $SQL = "SELECT A.id, rp_order_id, rp_id_emp, rp_name, rp_surname, C.department_name, rp_email, rp_desk_phone, D.type_problem_name, rp_start_job, rp_pending_job, rp_success_job, rp_sumdate_job, rp_sla_job, rp_desc, rp_solve, rp_personnel_closed, rp_status, B.rp_comment, B.rp_feedback, B.rp_id_order, cc_report,cc_respond,report_agent,cc_problem_time,cc_problem,cc_closed,agent_closed ";
-//   $SQL = $SQL . "FROM report_it A LEFT JOIN comment B ON (A.rp_order_id = B.rp_id_order) INNER JOIN department C ON (A.rp_dep = C.id_department) INNER JOIN type_problem D ON (A.rp_type_problem = D.id_problem) WHERE rp_start_job BETWEEN ' " . $date_start . " 'AND' " . $date_end . "' ";
-//   $SQL = $SQL . "GROUP BY rp_order_id ORDER BY A.id DESC";
-//   $rows = mysqli_query($con, $SQL);
-// } else {
-//   $SQL = "SELECT A.id, rp_order_id, rp_id_emp, rp_name, rp_surname, C.department_name, rp_email, rp_desk_phone, D.type_problem_name, rp_start_job, rp_pending_job, rp_success_job, rp_sumdate_job, rp_sla_job, rp_desc, rp_solve, rp_personnel_closed, rp_status, B.rp_comment, B.rp_feedback, B.rp_id_order, cc_report,cc_respond,report_agent,cc_problem_time,cc_problem,cc_closed,agent_closed ";
-//   $SQL = $SQL . "FROM report_it A LEFT JOIN comment B ON (A.rp_order_id = B.rp_id_order) INNER JOIN department C ON (A.rp_dep = C.id_department) INNER JOIN type_problem D ON (A.rp_type_problem = D.id_problem) WHERE a.rp_type_problem ='" . $_POST['rp_type_problem'] . "' AND rp_start_job BETWEEN ' " . $date_start . " 'AND' " . $date_end . "' ";
-//   $SQL = $SQL . "GROUP BY rp_order_id ORDER BY A.id DESC";
-//   $rows = mysqli_query($con, $SQL);
-// }
-
-// print_r( $SQL); exit();
-// while ($row = mysqli_fetch_assoc($rows)) {
-//   fputcsv($output, $row);
-// }
-// fclose($output);
-// mysqli_close($con);
-// exit();
-// }
 $months[1] = 'มกราคม';
 $months[2] = 'กุมภาพันธ์';
 $months[3] = 'มีนาคม';
@@ -72,25 +42,17 @@ $months[12] = 'ธันวาคม';
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
   <script>
-    /*$(function () {
-      $('input[name="daterange"]').daterangepicker({
-        opens: 'left'
-      }, function (start, end, label) {
-console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' to ' +
-          end.format('DD-MM-YYYY'));
-      });
-    });*/
 
     $(function() {
-  $('input[name="datetimes"]').daterangepicker({
-    timePicker: false,
-    // startDate: moment().startOf('hour'),
-    // endDate: moment().startOf('hour').add(32, 'hour'),
-    locale: {
-      format: 'YYYY/MM/DD '
-    }
-  });
-});
+      $('input[name="datetimes"]').daterangepicker({
+        timePicker: false,
+        // startDate: moment().startOf('hour'),
+        // endDate: moment().startOf('hour').add(32, 'hour'),
+        locale: {
+          format: 'YYYY/MM/DD '
+        }
+      });
+    });
   </script>
   <!--END-DateRangePicker-->
 
@@ -108,12 +70,11 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">KPI Report</a>
-        <form align="left" action="Func_Exportcsv.php" method="post"
-          style="display: inline-block; position: absolute; right: 0px; margin-top: 8px; margin-right: 10px;">
+        <form align="left" action="Func_Exportcsv.php" method="post" style="display: inline-block; position: absolute; right: 0px; margin-top: 8px; margin-right: 10px;">
 
           <button class="btn btn-success" value="Export file CSV." type="submit"> Export file CSV.</button>
-          
-          <input type="text" name="datetimes" value="datetimes" style="height: 33px;" width="80px"/>
+
+          <input type="text" name="datetimes" value="datetimes" style="height: 33px;" width="80px" />
           <!-- <input type="text" name="daterange" value="daterange" style="height: 33px;" width="80px" ;>  -->
 
           <select name="rp_type_problem" id="rp_type_problem" style="height: 33px;" width="80px" ;>
@@ -155,47 +116,41 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
   <div class="container">
     <div class="row">
       <div class="col-9 col-sm-9">
-      <select id="Month" name="Month" style="width:100%; height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
-                        <option value=""> ------ทั้งปี----- </option>
-                        <?php
-                            for ($i = 1; $i <= 12; $i++) {
-                        ?>
-                            <option value="<?php echo $months[$i]; ?>" <?php if ($i == date('m')) { echo "selected";  } ?>>
-                            <?php echo $months[$i]; ?>
-                            </option>
-                        <?php } ?>
-          <!-- <option value="มกราคม">มกราคม</option>
-          <option value="กุมภาพันธ์">กุมภาพันธ์</option>
-          <option value="มีนาคม">มีนาคม</option>
-          <option value="เมษายน">เมษายน</option>
-          <option value="พฤษภาคม">พฤษภาคม</option>
-          <option value="มิถุนายน">มิถุนายน</option>
-          <option value="กรกฎาคม">กรกฎาคม</option>
-          <option value="สิงหาคม">สิงหาคม</option>
-          <option value="กันยายน">กันยายน</option>
-          <option value="ตุลาคม">ตุลาคม</option>
-          <option value="พฤศจิกายน">พฤศจิกายน</option>
-          <option value="ธันวาคม">ธันวาคม</option> -->
-      </select>
-
+        <form method="POST">
+          <select id="Month" name="Month" onchange="this.form.submit();" style="width:100%; height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
+            <option value=""> ------ทั้งปี----- </option>
+            <?php
+            for ($i = 1; $i <= 12; $i++) {
+            ?>
+              <option value="<?php echo $months[$i]; ?>" <?php if ($i == date('m')) {
+                                                            echo "selected";
+                                                          } ?>>
+                <?php echo $months[$i]; ?>
+              </option>
+            <?php } ?>
+          </select>
+        </form>
       </div>
+
       <div class="col-3 col-sm-3">
-        <select id="NameAdmin" name="Admin"
-          style="width:100% ;height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; text-align:center; font-family: 'IBM Plex Sans Thai', sans-serif;">
-          <option value="1">ALL</option>
-          <option value="2">จักรรินทร์</option>
-          <option value="3">นุจรีย์</option>
-          <option value="4">พีรพงศ์</option>
-          <option value="5">วิจิตร</option>
-          <option value="6">วิชิต</option>
-          <option value="7">วีรยุทธ</option>
-          <option value="8">วุฒิไกร</option>
-          <option value="9">สุทัศน์</option>
-          <option value="10">อนุชา</option>
-          <option value="11">อุบลรัตน์</option>
-          <option value="12">Admin</option>
-          <option value="13">นักศึกษาฝึกงาน</option>
+        <form method="POST">
+        <select id="NameAdmin" name="NameAdmin" onchange="this.form.submit();" style="width:100% ;height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; text-align:center; font-family: 'IBM Plex Sans Thai', sans-serif;">
+          <option value="ALL">ALL</option>
+          <option value="นักศึกษาฝึกงาน">นักศึกษาฝึกงาน</option>
+          <option value="จักรรินทร์">จักรรินทร์</option>
+          <option value="นุจรีย์">นุจรีย์</option>
+          <option value="พีรพงศ์">พีรพงศ์</option>
+          <option value="วิจิตร">วิจิตร</option>
+          <option value="วิชิต">วิชิต</option>
+          <option value="วีรยุทธ">วีรยุทธ</option>
+          <option value="วุฒิไกร">วุฒิไกร</option>
+          <option value="สุทัศน์">สุทัศน์</option>
+          <option value="อนุชา">อนุชา</option>
+          <option value="อุบลรัตน์">อุบลรัตน์</option>
+          <option value="Admin">Admin</option>
         </select>
+        </form>
+        
       </div>
     </div>
   </div>
@@ -210,8 +165,7 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
       <div class="col-9 col-sm-9">
         <table class="table table-bordered">
           <!-- ส่วนของหัวตาราง -->
-          <thead
-            style="background-color: #ffb7f9b7; font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 18px; text-align: center;">
+          <thead style="background-color: #ffb7f9b7; font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 18px; text-align: center;">
             <tr>
               <th style=" text-align:center;">ปัญหา
                 <!-- ปุ่ม filter และ dropdown-->
@@ -225,52 +179,34 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
                   </button>
 
                   <!-- ส่วนของปุ่ม filter-->
-                  <form name="myform" action="checkboxes.asp" method="POST">
+                  <form name="myform" action="" method="GET">
                     <div id="myDropdown" class="dropdown-content ">
                       <div style="text-align:left;">
-                        <input type="checkbox" name="check_list" value="1" >Computer&Notebook
-                        ใช้งานไม่ได้
-                        <br>
-                        <input type="checkbox" name="check_list" value="2" >E-mail
-                        รับส่งใช้งานไม่ได้
-                        <br>
-                        <input type="checkbox" name="check_list" value="3" >File Share
-                        ใช้งานไม่ได้
-                        <br>
-                        <input type="checkbox" name="check_list" value="4" >Internet
-                        ใช้งานไม่ได้
-                        <br>
-                        <input type="checkbox" name="check_list" value="5">Service
-                        ตู้บุญเติมมีปัญหา
-                        <br>
-                        <input type="checkbox" name="check_list" value="6" >ขอเพิ่ม
-                        สิทธิ์
-                        การใช้งานระบบ
-                        <br>
-                        <input type="checkbox" name="check_list" value="7" >ขอติดตั้งโปรแกรมเพิ่มเติม
-                        <br>
-                        <input type="checkbox" name="check_list" value="9"  >งานโปรเจค
-                        <br>
-                        <input type="checkbox" name="check_list" value="10"  >ขอยืม PC &
-                        Notebook / อุปกรณ์คอมพิวเตอร์
-                        <br>
-                        <input type="checkbox" name="check_list" value="11"  >ปัญหา
-                        Printer /
-                        Scanner / FAX
-                        <br>
-                        <input type="checkbox" name="check_list" value="12" >ปัญหา
-                        ระบบโทรศัพท์ / CRM
-                        <br>
-                        <input type="checkbox" name="check_list" value="13" >รีเซท /
-                        ปลดล็อครหัสการใช้งานระบบ
-                        <br>
-                        <input type="checkbox" name="check_list" value="14" >ส่งเครื่องพนักงานใหม่
-                        <br>
-                        <input type="checkbox" name="check_list" value="15" >อื่น ๆ
-                        <br><input type="checkbox" id="myCheck"name="check_list" value="16"  >ปัญหา
-                        Cenpay
-                        <br>
-                        <input type="button" class="btn btn-warning" name="Check_All" value="Check All" onClick="Check(document.myform.check_list)">
+                        <?php
+
+                        $con = mysqli_connect("localhost", "root", "", "test_web_report");
+                        $brand_query = "SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem GROUP BY rp_type_problem;";
+                        $brand_query_run  = mysqli_query($con, $brand_query);
+
+                        if (mysqli_num_rows($brand_query_run) > 0) {
+                          foreach ($brand_query_run as $Typeproblem) {
+                            $checked = [];
+                            if (isset($_GET['typeP'])) {
+                              $checked = $_GET['typeP'];
+                            }
+                        ?>
+                            <div>
+                              <input type="checkbox" name="typeP" value="<?= $Typeproblem['id_problem']; ?>" <?php if (in_array($Typeproblem['id_problem'], $checked)) {
+                                                                                                                echo "checked";
+                                                                                                              } ?> />
+                              <?= $Typeproblem['type_problem_name']; ?>
+                            </div>
+                        <?php
+                          }
+                        }
+                        ?>
+
+                        <input type="button" class="btn btn-warning" name="Check_All" value="Check All" onClick="Check(document.myform.typeP)">
                         <!-- <button class="btn btn-warning" onclick="Checkingall()" id="allcheck">ดูทั้งหมด </button> -->
                         <button type="submit" class="btn btn-success">confirm</button>
                       </div>
@@ -292,16 +228,25 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
       <!-- สินสุด ส่วนของหัวตาราง -->
 
       <!-- ส่วนของการใส่ข้อมูล Record -->
-      <?php include("TB_ALL.php") ;?>
-        <!--  สินสุด ส่วนของการใส่ข้อมูล Record -->
+
+      <?php
+      $emp=$_POST['NameAdmin'];
+      $m =$_POST['Month'];
+      if ($emp!='ALL')
+      {
+        include ('TB_2Con.php');
+}
+  
+?>
+      <!--  สินสุด ส่วนของการใส่ข้อมูล Record -->
       </table>
+            
     </div>
 
     <!-- แสดงตารางฝั่งคำนวณ KPI-->
     <div class="col-9 col-sm-3">
       <table class="table table-bordered">
-        <thead
-          style="background-color:#FFCCCC; font-family: 'IBM Plex Sans Thai', sans-serif; text-shadow: 10px; font-size: 20px;">
+        <thead style="background-color:#FFCCCC; font-family: 'IBM Plex Sans Thai', sans-serif; text-shadow: 10px; font-size: 20px;">
           <tr>
             <th style="text-align:center;">คิดเป็นเปอร์เซนต์</th>
           </tr>
@@ -312,18 +257,19 @@ console.log("A new date selection was made: " + start.format('DD-MM-YYYY') + ' t
             <td style="text-align:center; height:600px; font-size: 28px; background-color: #AEFDD8;">
               <br><br><br><br><br><br>
               <?php
-                            $AA = $Adata - ($NSdata + $Nudata);
-                            $KPI = ($sucdata / $AA) * 100;
-                            $ans = number_format($KPI, 2);
-                            echo "$ans" . "%";
-                            ?>
+              $AA = $Adata - ($NSdata + $Nudata);
+              $KPI = ($sucdata / $AA) * 100;
+              $ans = number_format($KPI, 2);
+              echo "$ans" . "%";
+              ?>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+    <!-- จบ ตาราง-->
   </div>
-  <!-- จบ ตาราง-->
+
 </body>
 
 </html>
