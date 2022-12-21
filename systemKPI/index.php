@@ -1,23 +1,7 @@
 <?php
-$a = 666;
-$b = 777;
+include('MnP_IT.php');
 ?>
-<?php
 
-$months[1] = 'มกราคม';
-$months[2] = 'กุมภาพันธ์';
-$months[3] = 'มีนาคม';
-$months[4] = 'เมษายน';
-$months[5] = 'พฤษภาคม';
-$months[6] = 'มิถุนายน';
-$months[7] = 'กรกฎาคม';
-$months[8] = 'สิงหาคม';
-$months[9] = 'กันยายน';
-$months[10] = 'ตุลาคม';
-$months[11] = 'พฤศจิกายน';
-$months[12] = 'ธันวาคม';
-
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
@@ -117,37 +101,34 @@ $months[12] = 'ธันวาคม';
     <div class="row">
       <div class="col-9 col-sm-9">
         <form method="POST">
-          <select id="Month" name="Month" onchange="this.form.submit();" style="width:100%; height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
-            <option value=""> ------ทั้งปี----- </option>
-            <?php
-            for ($i = 1; $i <= 12; $i++) {
-            ?>
-              <option value="<?php echo $months[$i]; ?>" <?php if ($i == date('m')) {
+        <select id="Month" name="Month" onchange="this.form.submit();" style="width:100%; height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
+          <option value=""> ------ทั้งปี----- </option>
+          <?php
+          $selected_month = isset($_POST['Month']) ? $_POST['Month'] : null;
+          foreach ($months as $month_index => $month_name) {
+          ?>
+            <option value="<?php echo $month_name; ?>" <?php if ($month_name == $selected_month) {
                                                             echo "selected";
                                                           } ?>>
-                <?php echo $months[$i]; ?>
-              </option>
-            <?php } ?>
-          </select>
-        </form>
+              <?php echo $month_name; ?>
+            </option>
+          <?php } ?>
+        </select>
       </div>
 
       <div class="col-3 col-sm-3">
-        <form method="POST">
         <select id="NameAdmin" name="NameAdmin" onchange="this.form.submit();" style="width:100% ;height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; text-align:center; font-family: 'IBM Plex Sans Thai', sans-serif;">
-          <option value="ALL">ALL</option>
-          <option value="นักศึกษาฝึกงาน">นักศึกษาฝึกงาน</option>
-          <option value="จักรรินทร์">จักรรินทร์</option>
-          <option value="นุจรีย์">นุจรีย์</option>
-          <option value="พีรพงศ์">พีรพงศ์</option>
-          <option value="วิจิตร">วิจิตร</option>
-          <option value="วิชิต">วิชิต</option>
-          <option value="วีรยุทธ">วีรยุทธ</option>
-          <option value="วุฒิไกร">วุฒิไกร</option>
-          <option value="สุทัศน์">สุทัศน์</option>
-          <option value="อนุชา">อนุชา</option>
-          <option value="อุบลรัตน์">อุบลรัตน์</option>
-          <option value="Admin">Admin</option>
+        <option value=""> ------ทุกคน----- </option>
+        <?php
+         $selected_Peoples = isset($_POST['NameAdmin']) ? $_POST['NameAdmin'] : null;
+        foreach ($Peoples as $Peoples_index => $Peoples_name) {
+          ?>
+            <option value="<?php echo $Peoples_name; ?>" <?php if ($Peoples_name == $selected_Peoples) {
+                                                            echo "selected";
+                                                          } ?>>
+              <?php echo $Peoples_name; ?>
+            </option>
+          <?php } ?>>
         </select>
         </form>
         
@@ -230,17 +211,22 @@ $months[12] = 'ธันวาคม';
       <!-- ส่วนของการใส่ข้อมูล Record -->
 
       <?php
-      $emp=$_POST['NameAdmin'];
-      $m =$_POST['Month'];
-      if ($emp!='ALL')
-      {
-        include ('TB_2Con.php');
-}
+      $M = $_POST['Month'];
+      $EMP = $_POST['NameAdmin'];
+      if(empty($M) && empty($EMP)){
+        include('TB_ALL.php');
+      }else if(isset($M) && empty($EMP)) {
+        include('TB_MCon.php');
+      }else if(empty($M) && isset($EMP)) {
+        include('TB_PCon.php');
+      }else {
+        include('TB_2Con.php');
+      }
+      
   
 ?>
       <!--  สินสุด ส่วนของการใส่ข้อมูล Record -->
-      </table>
-            
+      </table>     
     </div>
 
     <!-- แสดงตารางฝั่งคำนวณ KPI-->
@@ -257,10 +243,17 @@ $months[12] = 'ธันวาคม';
             <td style="text-align:center; height:600px; font-size: 28px; background-color: #AEFDD8;">
               <br><br><br><br><br><br>
               <?php
-              $AA = $Adata - ($NSdata + $Nudata);
+              try {
+                $AA = $Adata - ($NSdata + $Nudata);
               $KPI = ($sucdata / $AA) * 100;
               $ans = number_format($KPI, 2);
               echo "$ans" . "%";
+            } catch (DivisionByZeroError  $e) {
+                // log the error message
+                error_log($e->getMessage());
+                // display a custom error page
+                 echo "<span style='color:red;'>0.00%</span>";
+            }
               ?>
             </td>
           </tr>
