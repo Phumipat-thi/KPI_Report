@@ -1,5 +1,7 @@
 <?php
 include('MnP_IT.php');
+$M = $_POST['Month'];
+$EMP = $_POST['NameAdmin'];
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -128,6 +130,7 @@ include('MnP_IT.php');
                                                           } ?>>
               <?php echo $Peoples_name; ?>
             </option>
+            
           <?php } ?>>
         </select>
         </form>
@@ -160,12 +163,12 @@ include('MnP_IT.php');
                   </button>
 
                   <!-- ส่วนของปุ่ม filter-->
-                  <form name="myform" action="" method="GET">
+                  <form name="myform" action="Func_Fil.php" method="GET">
                     <div id="myDropdown" class="dropdown-content ">
                       <div style="text-align:left;">
                         <?php
 
-                        $con = mysqli_connect("localhost", "root", "", "test_web_report");
+                        require ("conn.php");
                         $brand_query = "SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem GROUP BY rp_type_problem;";
                         $brand_query_run  = mysqli_query($con, $brand_query);
 
@@ -174,12 +177,11 @@ include('MnP_IT.php');
                             $checked = [];
                             if (isset($_GET['typeP'])) {
                               $checked = $_GET['typeP'];
+                              
                             }
                         ?>
                             <div>
-                              <input type="checkbox" name="typeP" value="<?= $Typeproblem['id_problem']; ?>" <?php if (in_array($Typeproblem['id_problem'], $checked)) {
-                                                                                                                echo "checked";
-                                                                                                              } ?> />
+                              <input type="checkbox" name="typeP[]" value="<?= $Typeproblem['id_problem']; ?>" <?php if (in_array($Typeproblem['id_problem'], $checked)) { echo "checked"; } ?> />
                               <?= $Typeproblem['type_problem_name']; ?>
                             </div>
                         <?php
@@ -211,8 +213,8 @@ include('MnP_IT.php');
       <!-- ส่วนของการใส่ข้อมูล Record -->
 
       <?php
-      $M = $_POST['Month'];
-      $EMP = $_POST['NameAdmin'];
+
+     
       if(empty($M) && empty($EMP)){
         include('TB_ALL.php');
       }else if(isset($M) && empty($EMP)) {
@@ -240,7 +242,7 @@ include('MnP_IT.php');
 
         <tbody>
           <tr>
-            <td style="text-align:center; height:600px; font-size: 28px; background-color: #AEFDD8;">
+            <td style="text-align:center; height:600px; font-size: 28px; background-color: #AEFDD8; ">
               <br><br><br><br><br><br>
               <?php
               try {
@@ -252,7 +254,7 @@ include('MnP_IT.php');
                 // log the error message
                 error_log($e->getMessage());
                 // display a custom error page
-                 echo "<span style='color:red;'>0.00%</span>";
+                 echo "<span style='color:red;font-weight:bold;'>0.00%</span>";
             }
               ?>
             </td>

@@ -3,7 +3,7 @@
         <?php 
 
         require ("conn.php");
-        $sql = " SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem  GROUP BY `rp_type_problem`;  ";
+        $sql = " SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem  GROUP BY `rp_type_problem` ;  ";
         $Loopresult = mysqli_query($con, $sql);
 
         while ($row = mysqli_fetch_array($Loopresult)) { ?>
