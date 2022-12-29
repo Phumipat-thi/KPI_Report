@@ -2,6 +2,7 @@
 include('MnP_IT.php');
 $M = $_POST['Month'];
 $EMP = $_POST['NameAdmin'];
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -161,9 +162,8 @@ $EMP = $_POST['NameAdmin'];
                     </span>
 
                   </button>
-
                   <!-- ส่วนของปุ่ม filter-->
-                  <form name="myform" action="Func_Fil.php" method="GET">
+                  <form method="POST">
                     <div id="myDropdown" class="dropdown-content ">
                       <div style="text-align:left;">
                         <?php
@@ -175,27 +175,26 @@ $EMP = $_POST['NameAdmin'];
                         if (mysqli_num_rows($brand_query_run) > 0) {
                           foreach ($brand_query_run as $Typeproblem) {
                             $checked = [];
-                            if (isset($_GET['typeP'])) {
-                              $checked = $_GET['typeP'];
-                              
+                            if (isset($_POST['typeP'])) {
+                              $checked = $_POST['typeP'];
                             }
                         ?>
                             <div>
-                              <input type="checkbox" name="typeP[]" value="<?= $Typeproblem['id_problem']; ?>" <?php if (in_array($Typeproblem['id_problem'], $checked)) { echo "checked"; } ?> />
+                              <input type="checkbox" name="typeP[]" onsubmit="return false;" value="<?= $Typeproblem['id_problem']; ?>" <?php if (in_array($Typeproblem['id_problem'], $checked)) { echo "checked"; } ?> />
                               <?= $Typeproblem['type_problem_name']; ?>
                             </div>
                         <?php
                           }
                         }
                         ?>
+                        <input type="button" class="btn btn-info"  name="Check_All" value="Check All" onClick="checkAll()">
+                        <input type="button" class="btn btn-seconary" name="UnCheck_All" value="UnCheck All " onClick="toggle(this)">
+                        <input type="submit" class="btn btn-success" name="confirm" value="confirm " >
 
-                        <input type="button" class="btn btn-warning" name="Check_All" value="Check All" onClick="Check(document.myform.typeP)">
-                        <!-- <button class="btn btn-warning" onclick="Checkingall()" id="allcheck">ดูทั้งหมด </button> -->
-                        <button type="submit" class="btn btn-success">confirm</button>
                       </div>
 
                     </div>
-                  </form>
+                    </form>
               </th>
 
       </div>
@@ -246,8 +245,8 @@ $EMP = $_POST['NameAdmin'];
               <br><br><br><br><br><br>
               <?php
               try {
-                $AA = $Adata - ($NSdata + $Nudata);
-              $KPI = ($sucdata / $AA) * 100;
+                $AA = $AllDsum - ($NoSLADsum + $NullDsum);
+              $KPI = ($PDsum / $AA) * 100;
               $ans = number_format($KPI, 2);
               echo "$ans" . "%";
             } catch (DivisionByZeroError  $e) {
