@@ -24,7 +24,7 @@
           
           <td>
           <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ผ่าน' AND MONTHNAME(rp_success_job) like '$M' ;";
+    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ผ่าน' AND MONTHNAME(rp_success_job) like '$M' AND year(rp_success_job) like '$y' ;";
     $result = mysqli_query($con, $SSuc);
     $data=mysqli_num_rows($result);
     $APD[] = $data; 
@@ -34,7 +34,7 @@ $PDsum = array_sum($APD);
 
           <td>
           <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ไม่ผ่าน' AND MONTHNAME(rp_success_job) like '$M' ;";
+    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ไม่ผ่าน' AND MONTHNAME(rp_success_job) like '$M' AND year(rp_success_job) like '$y' ;";
     $result = mysqli_query($con, $SSuc);
     $data=mysqli_num_rows($result);
     $AND[] = $data; 
@@ -44,7 +44,7 @@ $NDsum = array_sum($AND);
 
           <td>
           <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'No SLA'  AND MONTHNAME(rp_success_job) like '$M' ;";
+    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'No SLA'  AND MONTHNAME(rp_success_job) like '$M' AND year(rp_success_job) like '$y' ;";
     $result = mysqli_query($con, $SSuc);
     $data=mysqli_num_rows($result);
     $ANoSLAD[] = $data; 
@@ -54,7 +54,7 @@ $NoSLADsum = array_sum($ANoSLAD);
           
           <td>
           <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like '' AND MONTHNAME(rp_success_job) like '$M';";
+    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like '' AND MONTHNAME(rp_success_job) like '$M' AND year(rp_success_job) like '$y';";
     $result = mysqli_query($con, $SSuc);
     $data=mysqli_num_rows($result);
     $ANullD[] = $data; 
@@ -64,7 +64,7 @@ $NullDsum = array_sum($ANullD);
           
           <td>
           <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND MONTHNAME(rp_success_job) like '$M' ;";
+    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND MONTHNAME(rp_success_job) like '$M'  AND year(rp_success_job) like '$y';";
     $result = mysqli_query($con, $SSuc);
     $data=mysqli_num_rows($result);
     $AAllD[] = $data; 
@@ -93,7 +93,7 @@ $AllDsum = array_sum($AAllD);
           
           <td>
           <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ผ่าน' AND MONTHNAME(rp_success_job) like '$M' ;";
+    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ผ่าน' AND MONTHNAME(rp_success_job) like '$M' AND year(rp_success_job) like '$y' ;";
     $result = mysqli_query($con, $SSuc);
     $data=mysqli_num_rows($result);
     $APD[] = $data; 
@@ -103,7 +103,7 @@ $PDsum = array_sum($APD);
 
           <td>
           <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ไม่ผ่าน' AND MONTHNAME(rp_success_job) like '$M' ;";
+    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ไม่ผ่าน' AND MONTHNAME(rp_success_job) like '$M' AND year(rp_success_job) like '$y' ;";
     $result = mysqli_query($con, $SSuc);
     $data=mysqli_num_rows($result);
     $AND[] = $data; 
@@ -113,7 +113,7 @@ $NDsum = array_sum($AND);
 
           <td>
           <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'No SLA'  AND MONTHNAME(rp_success_job) like '$M' ;";
+    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'No SLA'  AND MONTHNAME(rp_success_job) like '$M'  AND year(rp_success_job) like '$y';";
     $result = mysqli_query($con, $SSuc);
     $data=mysqli_num_rows($result);
     $ANoSLAD[] = $data; 
@@ -123,7 +123,7 @@ $NoSLADsum = array_sum($ANoSLAD);
           
           <td>
           <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like '' AND MONTHNAME(rp_success_job) like '$M';";
+    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like '' AND MONTHNAME(rp_success_job) like '$M' AND year(rp_success_job) like '$y' ;";
     $result = mysqli_query($con, $SSuc);
     $data=mysqli_num_rows($result);
     $ANullD[] = $data; 
@@ -133,7 +133,7 @@ $NullDsum = array_sum($ANullD);
           
           <td>
           <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND MONTHNAME(rp_success_job) like '$M' ;";
+    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND MONTHNAME(rp_success_job) like '$M' AND year(rp_success_job) like '$y'  ;";
     $result = mysqli_query($con, $SSuc);
     $data=mysqli_num_rows($result);
     $AAllD[] = $data; 

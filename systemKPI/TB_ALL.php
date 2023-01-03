@@ -26,7 +26,7 @@ $r = $row["rp_type_problem"];
   
   <td>
   <?php 
-$SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ผ่าน' ;";
+$SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ผ่าน' AND year(rp_success_job) like '$y' ;";
 $result = mysqli_query($con, $SSuc);
 $data=mysqli_num_rows($result);
 $APD[] = $data; 
@@ -36,7 +36,7 @@ echo $data;?>
 
   <td>
   <?php 
-$SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ไม่ผ่าน' ;";
+$SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ไม่ผ่าน' AND year(rp_success_job) like '$y';";
 $result = mysqli_query($con, $SSuc);
 $data=mysqli_num_rows($result);
 $AND[] = $data; 
@@ -46,7 +46,7 @@ echo $data;?>
 
   <td>
   <?php 
-$SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'No SLA'  ;";
+$SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'No SLA' AND year(rp_success_job) like '$y' ;";
 $result = mysqli_query($con, $SSuc);
 $data=mysqli_num_rows($result);
 $ANoSLAD[] = $data; 
@@ -56,7 +56,7 @@ echo $data;?>
   
   <td>
   <?php 
-$SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like ''  ;";
+$SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like '' AND year(rp_success_job) like '$y' ;";
 $result = mysqli_query($con, $SSuc);
 $data=mysqli_num_rows($result);
 $ANullD[] = $data; 
@@ -66,7 +66,7 @@ echo $data;?>
   
   <td>
   <?php 
-$SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' ;";
+$SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r'AND year(rp_success_job) like '$y' ;";
 $result = mysqli_query($con, $SSuc);
 $data=mysqli_num_rows($result);
 $AAllD[] = $data; 
@@ -97,7 +97,7 @@ echo $data;?>
     
     <td>
     <?php 
-  $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ผ่าน' ;";
+  $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ผ่าน' AND year(rp_success_job) like '$y';";
   $result = mysqli_query($con, $SSuc);
   $data=mysqli_num_rows($result);
   $APD[] = $data; 
@@ -107,7 +107,7 @@ echo $data;?>
   
     <td>
     <?php 
-  $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ไม่ผ่าน' ;";
+  $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ไม่ผ่าน'AND year(rp_success_job) like '$y' ;";
   $result = mysqli_query($con, $SSuc);
   $data=mysqli_num_rows($result);
   $AND[] = $data; 
@@ -117,7 +117,7 @@ echo $data;?>
   
     <td>
     <?php 
-  $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'No SLA'  ;";
+  $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'No SLA'AND year(rp_success_job) like '$y'  ;";
   $result = mysqli_query($con, $SSuc);
   $data=mysqli_num_rows($result);
   $ANoSLAD[] = $data; 
@@ -127,7 +127,7 @@ echo $data;?>
     
     <td>
     <?php 
-  $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like ''  ;";
+  $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like '' AND year(rp_success_job) like '$y' ;";
   $result = mysqli_query($con, $SSuc);
   $data=mysqli_num_rows($result);
   $ANullD[] = $data; 
@@ -137,7 +137,7 @@ echo $data;?>
     
     <td>
     <?php 
-  $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' ;";
+  $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r'AND year(rp_success_job) like '$y' ;";
   $result = mysqli_query($con, $SSuc);
   $data=mysqli_num_rows($result);
   $AAllD[] = $data; 

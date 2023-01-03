@@ -1,6 +1,7 @@
 <?php
 include('MnP_IT.php');
 $M = $_POST['Month'];
+$y = $_POST['Year'];
 $EMP = $_POST['NameAdmin'];
 
 ?>
@@ -102,7 +103,23 @@ $EMP = $_POST['NameAdmin'];
   <!-- dropdown month&people -->
   <div class="container">
     <div class="row">
-      <div class="col-9 col-sm-9">
+    <div class="col-3 col-sm-3">
+        <form method="POST">
+        <select id="Year" name="Year" onchange="this.form.submit();" style="width:100%; height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
+          <?php
+          $selected_Year = isset($_POST['Year']) ? $_POST['Year'] : null;
+          foreach ($Year as $Year_index => $Year_name) {
+          ?>
+            <option value="<?php echo $Year_name; ?>" <?php if ($Year_name == $selected_Year) {
+                                                            echo "selected";
+                                                          } ?>>
+              <?php echo $Year_name; ?>
+            </option>
+          <?php } ?>
+        </select>
+      </div>
+
+      <div class="col-6 col-sm-6">
         <form method="POST">
         <select id="Month" name="Month" onchange="this.form.submit();" style="width:100%; height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
           <option value=""> ------ทั้งปี----- </option>
@@ -118,6 +135,7 @@ $EMP = $_POST['NameAdmin'];
           <?php } ?>
         </select>
       </div>
+      
 
       <div class="col-3 col-sm-3">
         <select id="NameAdmin" name="NameAdmin" onchange="this.form.submit();" style="width:100% ;height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; text-align:center; font-family: 'IBM Plex Sans Thai', sans-serif;">
@@ -134,7 +152,6 @@ $EMP = $_POST['NameAdmin'];
             
           <?php } ?>>
         </select>
-        </form>
         
       </div>
     </div>
@@ -146,28 +163,15 @@ $EMP = $_POST['NameAdmin'];
   <!-- แสดงตารางทั้งหมด-->
   <div class="container">
     <div class="row">
-      <!-- แสดงตารางฝั่งปัญหา-->
-      <div class="col-9 col-sm-9">
-        <table class="table table-bordered">
+    <div class="col-3 col-sm-3">
+
+    <table class="table table-bordered">
           <!-- ส่วนของหัวตาราง -->
-          <thead style="background-color: #ffb7f9b7; font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 18px; text-align: center;">
+          <thead style="background-color: #e9e1ed; font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 16px; text-align: center;">
             <tr>
-              <th style=" text-align:center;">ปัญหา
-                <!-- ปุ่ม filter และ dropdown-->
-                <div class="dropdown">
-                  <button onclick="filterfunc()" class="dropbtn">
-
-                    <span>
-                      <img src="im/6488674.png" alt="ADbanner" class="filterbutton">
-                    </span>
-
-                  </button>
-                  <!-- ส่วนของปุ่ม filter-->
-                  <form method="POST">
-                    <div id="myDropdown" class="dropdown-content ">
-                      <div style="text-align:left;">
+              <th>
+              <form method="POST">
                         <?php
-
                         require ("conn.php");
                         $brand_query = "SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem GROUP BY rp_type_problem;";
                         $brand_query_run  = mysqli_query($con, $brand_query);
@@ -180,7 +184,7 @@ $EMP = $_POST['NameAdmin'];
                             }
                         ?>
                             <div>
-                              <input type="checkbox" name="typeP[]" onsubmit="return false;" value="<?= $Typeproblem['id_problem']; ?>" <?php if (in_array($Typeproblem['id_problem'], $checked)) { echo "checked"; } ?> />
+                              <input type="checkbox" name="typeP[]" onsubmit="return true" value="<?= $Typeproblem['id_problem']; ?>" <?php if (in_array($Typeproblem['id_problem'], $checked)) { echo "checked"; } ?> />
                               <?= $Typeproblem['type_problem_name']; ?>
                             </div>
                         <?php
@@ -191,10 +195,22 @@ $EMP = $_POST['NameAdmin'];
                         <input type="button" class="btn btn-seconary" name="UnCheck_All" value="UnCheck All " onClick="toggle(this)">
                         <input type="submit" class="btn btn-success" name="confirm" value="confirm " >
 
-                      </div>
-
-                    </div>
+                      
                     </form>
+              </th>
+                      </tr>
+                      </thead>
+                      </table>
+                      </div>
+    
+      <!-- แสดงตารางฝั่งปัญหา-->
+      <div class="col-6 col-sm-6">
+        <table class="table table-bordered">
+          <!-- ส่วนของหัวตาราง -->
+          <thead style="background-color: #ffb7f9b7; font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 16px; text-align: center;">
+            <tr>
+              <th style=" text-align:center;">
+              ปัญหา
               </th>
 
       </div>
@@ -231,7 +247,7 @@ $EMP = $_POST['NameAdmin'];
     </div>
 
     <!-- แสดงตารางฝั่งคำนวณ KPI-->
-    <div class="col-9 col-sm-3">
+    <div class="col-3 col-sm-3">
       <table class="table table-bordered">
         <thead style="background-color:#FFCCCC; font-family: 'IBM Plex Sans Thai', sans-serif; text-shadow: 10px; font-size: 20px;">
           <tr>
@@ -241,7 +257,7 @@ $EMP = $_POST['NameAdmin'];
 
         <tbody>
           <tr>
-            <td style="text-align:center; height:600px; font-size: 28px; background-color: #AEFDD8; ">
+            <td style="text-align:center; height:534px; font-size: 28px; background-color: #AEFDD8; ">
               <br><br><br><br><br><br>
               <?php
               try {
