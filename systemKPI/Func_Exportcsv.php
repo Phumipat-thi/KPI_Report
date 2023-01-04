@@ -10,7 +10,7 @@ $date_end =  str_replace('/','-', trim($ex[1]));
 $probType=$_POST['rp_type_problem'];
 // Fetch records from database 
 if(empty($_POST['rp_type_problem'])){
-    $query = $con->query("SELECT * FROM report_it  WHERE rp_start_job Between '$date_start' and '$date_end' ORDER BY id ASC "); 
+    $query = $con->query("SELECT * FROM report_it  WHERE rp_start_job Between  '$date_start' and '$date_end' ORDER BY id ASC "); 
 }else{
     $query = $con->query("SELECT * FROM report_it   WHERE rp_start_job Between '$date_start' and '$date_end' AND rp_type_problem = '$probType' ORDER BY id ASC ");
 }

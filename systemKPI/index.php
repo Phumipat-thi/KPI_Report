@@ -4,6 +4,24 @@ $M = $_POST['Month'];
 $y = $_POST['Year'];
 $EMP = $_POST['NameAdmin'];
 
+// ทำ เข้า server 
+// session_start(); 
+// 	require_once("connect.php");
+
+// 	if(!isset($_SESSION['emp_id']))
+// 	{
+// 		echo "<script language=\"JavaScript\">";
+// 		echo "alert('กรุณาล็อกอินเข้าสู่ระบบ !!!');window.location='login.html'";
+// 		echo "</script>";
+// 	}
+
+// 	if($_SESSION['emp_status'] != "Admin")
+// 	{
+// 		echo "<script language=\"JavaScript\">";
+// 		echo "alert('เฉพาะ Admin เท่านั้น !!!');window.location='admin.html'";
+// 		echo "</script>";
+// 	}
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -261,8 +279,7 @@ $EMP = $_POST['NameAdmin'];
               <br><br><br><br><br><br>
               <?php
               try {
-                $AA = $AllDsum - ($NoSLADsum + $NullDsum);
-              $KPI = ($PDsum / $AA) * 100;
+              $KPI = (($PDsum+$NoSLADsum) / $AllDsum) * 100;
               $ans = number_format($KPI, 2);
               echo "$ans" . "%";
             } catch (DivisionByZeroError  $e) {

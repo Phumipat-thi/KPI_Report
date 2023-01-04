@@ -1,7 +1,3 @@
-function filterfunc() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
 function toggle(source) {
   checkboxes = document.getElementsByName('typeP[]');
   for(var i=0, n=checkboxes.length;i<n;i++) {
