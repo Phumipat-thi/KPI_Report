@@ -78,7 +78,7 @@ $AllDsum = array_sum($AAllD);
           <tbody>
         <?php 
 
-        require ("conn.php");
+        require ("z.php");
         $sql = " SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem   GROUP BY `rp_type_problem`;  ";
         $Loopresult = mysqli_query($con, $sql);
 
@@ -123,7 +123,7 @@ $NoSLADsum = array_sum($ANoSLAD);
           
           <td>
           <?php 
-    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like '' AND rp_personnel_closed = '$EMP' AND year(rp_success_job) like '$y' ;";
+    $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND (rp_sla_job like 'เวลาไม่ถูกต้อง' or rp_sla_job like '') AND rp_personnel_closed = '$EMP' AND year(rp_success_job) like '$y' ;";
     $result = mysqli_query($con, $SSuc);
     $data=mysqli_num_rows($result);
     $ANullD[] = $data; 

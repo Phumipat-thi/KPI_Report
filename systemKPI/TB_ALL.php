@@ -127,7 +127,7 @@ echo $data;?>
     
     <td>
     <?php 
-  $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like '' AND year(rp_success_job) like '$y' ;";
+  $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND (rp_sla_job like 'เวลาไม่ถูกต้อง' or rp_sla_job like '') AND year(rp_success_job) like '$y' ;";
   $result = mysqli_query($con, $SSuc);
   $data=mysqli_num_rows($result);
   $ANullD[] = $data; 

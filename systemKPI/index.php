@@ -1,5 +1,5 @@
 <?php
-include('MnP_IT.php');
+include('MnY.php');
 $M = $_POST['Month'];
 $y = $_POST['Year'];
 $EMP = $_POST['NameAdmin'];
@@ -76,13 +76,13 @@ $EMP = $_POST['NameAdmin'];
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">KPI Report</a>
-        <form align="left" action="Func_Exportcsv.php" method="post" style="display: inline-block; position: absolute; right: 0px; margin-top: 8px; margin-right: 10px;">
+        <button align="left"   class="btn btn-success" style="display: inline-block; position: absolute; right: 0px; margin-top: 8px; margin-right: 10px;" onclick="window.open('popform.php','Popup','height=400,width=700,status=no,toolbar=no,menubar=no')">Export CSV.</button>
+        <!-- <form align="left" action="Func_Exportcsv.php" method="post" style="display: inline-block; position: absolute; right: 0px; margin-top: 8px; margin-right: 10px;">
 
           <button class="btn btn-success" value="Export file CSV." type="submit"> Export file CSV.</button>
 
           <input type="text" name="datetimes" value="datetimes" style="height: 33px;" width="80px" />
-          <!-- <input type="text" name="daterange" value="daterange" style="height: 33px;" width="80px" ;>  -->
-
+         
           <select name="rp_type_problem" id="rp_type_problem" style="height: 33px;" width="80px" ;>
             <option name="TP" value selected> ---- ประเภทปัญหาที่ต้องการ Export ----</option>
             <option value="1">Computer&Notebook ใช้งานไม่ได้</option>
@@ -101,7 +101,7 @@ $EMP = $_POST['NameAdmin'];
             <option value="15">ส่งเครื่องพนักงานใหม่ </option>
             <option value="16">ปัญหา Cenpay</option>
           </select>
-        </form>
+        </form> -->
       </div>
     </div>
   </nav>
@@ -118,7 +118,7 @@ $EMP = $_POST['NameAdmin'];
   </marquee>
   <!-- end slide -->
 
-  <!-- dropdown month&people -->
+  <!-- dropdown month,people&year -->
   <div class="container">
     <div class="row">
     <div class="col-3 col-sm-3">
@@ -158,33 +158,35 @@ $EMP = $_POST['NameAdmin'];
       <div class="col-3 col-sm-3">
         <select id="NameAdmin" name="NameAdmin" onchange="this.form.submit();" style="width:100% ;height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:#BEBEBE; text-align:center; font-family: 'IBM Plex Sans Thai', sans-serif;">
         <option value=""> ------ทุกคน----- </option>
-        <?php
-         $selected_Peoples = isset($_POST['NameAdmin']) ? $_POST['NameAdmin'] : null;
-        foreach ($Peoples as $Peoples_index => $Peoples_name) {
-          ?>
-            <option value="<?php echo $Peoples_name; ?>" <?php if ($Peoples_name == $selected_Peoples) {
-                                                            echo "selected";
-                                                          } ?>>
-              <?php echo $Peoples_name; ?>
-            </option>
-            
-          <?php } ?>>
+          <?php
+          $selected_Peoples = isset($_POST['NameAdmin']) ? $_POST['NameAdmin'] : null;
+          require ("conn.php");
+          $query = "SELECT * FROM report_it GROUP BY rp_personnel_closed;";
+          $query_run  = mysqli_query($con, $query);
+          while ($row = mysqli_fetch_assoc($query_run)) {
+            $name = $row['rp_personnel_closed'];
+            $selected = "";
+            if ($name == $selected_Peoples) {
+              $selected = "selected";
+            }
+            echo "<option value='$name' $selected>$name</option>";
+          }?>
+        </option>
         </select>
         
       </div>
     </div>
   </div>
-  <!-- สิ้นสุดdropdown month&people -->
+  <!-- สิ้นสุดdropdown month,people&year -->
 
   <br>
 
   <!-- แสดงตารางทั้งหมด-->
   <div class="container">
     <div class="row">
+<!-- Filter แสดงปัญหา/ไม่แสดงปัญหา-->
     <div class="col-3 col-sm-3">
-
     <table class="table table-bordered">
-          <!-- ส่วนของหัวตาราง -->
           <thead style="background-color: #e9e1ed; font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 16px; text-align: center;">
             <tr>
               <th>
@@ -202,7 +204,7 @@ $EMP = $_POST['NameAdmin'];
                             }
                         ?>
                             <div>
-                              <input type="checkbox" name="typeP[]" onsubmit="return true" value="<?= $Typeproblem['id_problem']; ?>" <?php if (in_array($Typeproblem['id_problem'], $checked)) { echo "checked"; } ?> />
+                              <input type="checkbox" name="typeP[]"  value="<?= $Typeproblem['id_problem']; ?>" <?php if (in_array($Typeproblem['id_problem'], $checked)) { echo "checked"; } ?> />
                               <?= $Typeproblem['type_problem_name']; ?>
                             </div>
                         <?php
@@ -220,6 +222,7 @@ $EMP = $_POST['NameAdmin'];
                       </thead>
                       </table>
                       </div>
+                      <!-- สิ้นสุด Filter แสดงปัญหา/ไม่แสดงปัญหา-->
     
       <!-- แสดงตารางฝั่งปัญหา-->
       <div class="col-6 col-sm-6">
@@ -227,27 +230,18 @@ $EMP = $_POST['NameAdmin'];
           <!-- ส่วนของหัวตาราง -->
           <thead style="background-color: #ffb7f9b7; font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 16px; text-align: center;">
             <tr>
-              <th style=" text-align:center;">
-              ปัญหา
-              </th>
-
-      </div>
-      <!-- สิ้นสุด ปุ่ม filter -->
-
-      <th style=" text-align:center;">ผ่าน</th>
-      <th style="  text-align:center;">ไม่ผ่าน</th>
-      <th style=" text-align:center;">No Sla</th>
-      <th style=" text-align:center;">Null</th>
-      <th style=" text-align:center;">ผลรวม</th>
-      </tr>
-      </thead>
+              <th style=" text-align:center;">ปัญหา</th>
+              <th style=" text-align:center;">ผ่าน</th>
+              <th style="  text-align:center;">ไม่ผ่าน</th>
+              <th style=" text-align:center;">No Sla</th>
+              <th style=" text-align:center;">Null</th>
+              <th style=" text-align:center;">ผลรวม</th>
+            </tr>
+          </thead>
       <!-- สินสุด ส่วนของหัวตาราง -->
 
       <!-- ส่วนของการใส่ข้อมูล Record -->
-
       <?php
-
-     
       if(empty($M) && empty($EMP)){
         include('TB_ALL.php');
       }else if(isset($M) && empty($EMP)) {
@@ -257,12 +251,11 @@ $EMP = $_POST['NameAdmin'];
       }else {
         include('TB_2Con.php');
       }
-      
-  
 ?>
       <!--  สินสุด ส่วนของการใส่ข้อมูล Record -->
       </table>     
     </div>
+    <!-- จบ แสดงตารางฝั่งปัญหา-->
 
     <!-- แสดงตารางฝั่งคำนวณ KPI-->
     <div class="col-3 col-sm-3">
@@ -294,9 +287,11 @@ $EMP = $_POST['NameAdmin'];
         </tbody>
       </table>
     </div>
-    <!-- จบ ตาราง-->
+      <!-- จบ แสดงตารางฝั่งคำนวณ KPI-->
+   
   </div>
-
+   <!-- จบ ตาราง-->
+   </div>
 </body>
 
 </html>
