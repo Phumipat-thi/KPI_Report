@@ -7,7 +7,7 @@ $y = $_POST['Year'];
 $EMP = $_POST['NameAdmin'];
  $pid = $_POST['typeP'];
              
-include_once 'conn.php'; 
+include_once 'connect.php'; 
 
 
 // Fetch records from database 
@@ -16,7 +16,7 @@ if(isset($_POST['typeP'])){
     $Spid = "'" . implode($glue, $pid) . "'" ;
             if(empty($M) && empty($EMP)){
                 //คำสั่งquery
-                $query = mysqli_query($con, "SELECT * FROM report_it  JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem  WHERE rp_type_problem in ($Spid) AND year(rp_success_job) like '$y' ORDER BY id ASC");
+                $query = mysqli_query($conn, "SELECT * FROM report_it  JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem  WHERE rp_type_problem in ($Spid) AND year(rp_success_job) like '$y' ORDER BY id ASC");
                 //ชุดการทำงานเพื่อqueryมา save เป็นcsv
                 include('Func_ExportCSV.php');
               }else if(isset($M) && empty($EMP)) {

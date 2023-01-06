@@ -10,10 +10,10 @@
  
 <tbody>
 <?php 
-require ("conn.php");
+require ("connect.php");
 $sql = " SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem WHERE rp_type_problem in ($Spid) GROUP BY rp_type_problem; ";
 
-$Loopresult = mysqli_query($con, $sql);
+$Loopresult = mysqli_query($conn, $sql);
 
 while ($row = mysqli_fetch_array($Loopresult)) { ?>
 <tr>
@@ -27,7 +27,7 @@ $r = $row["rp_type_problem"];
   <td>
   <?php 
 $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ผ่าน' AND year(rp_success_job) like '$y' ;";
-$result = mysqli_query($con, $SSuc);
+$result = mysqli_query($conn, $SSuc);
 $data=mysqli_num_rows($result);
 $APD[] = $data; 
 $PDsum = array_sum($APD);
@@ -37,7 +37,7 @@ echo $data;?>
   <td>
   <?php 
 $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ไม่ผ่าน' AND year(rp_success_job) like '$y';";
-$result = mysqli_query($con, $SSuc);
+$result = mysqli_query($conn, $SSuc);
 $data=mysqli_num_rows($result);
 $AND[] = $data; 
 $NDsum = array_sum($AND);
@@ -47,7 +47,7 @@ echo $data;?>
   <td>
   <?php 
 $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'No SLA' AND year(rp_success_job) like '$y' ;";
-$result = mysqli_query($con, $SSuc);
+$result = mysqli_query($conn, $SSuc);
 $data=mysqli_num_rows($result);
 $ANoSLAD[] = $data; 
 $NoSLADsum = array_sum($ANoSLAD);
@@ -57,7 +57,7 @@ echo $data;?>
   <td>
   <?php 
 $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND (rp_sla_job like 'เวลาไม่ถูกต้อง' or rp_sla_job like '') AND year(rp_success_job) like '$y' ;";
-$result = mysqli_query($con, $SSuc);
+$result = mysqli_query($conn, $SSuc);
 $data=mysqli_num_rows($result);
 $ANullD[] = $data; 
 $NullDsum = array_sum($ANullD);
@@ -67,7 +67,7 @@ echo $data;?>
   <td>
   <?php 
 $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r'AND year(rp_success_job) like '$y' ;";
-$result = mysqli_query($con, $SSuc);
+$result = mysqli_query($conn, $SSuc);
 $data=mysqli_num_rows($result);
 $AAllD[] = $data; 
 $AllDsum = array_sum($AAllD);
@@ -80,10 +80,10 @@ echo $data;?>
  <?php /*ถ้าไม่มีการติ๊กใดๆ ให้แสดงทั้งหมด*/}elseif (empty($_POST['typeP'])){  ?>
   <tbody>
   <?php 
-  require ("conn.php");
+  require ("connect.php");
   $sql = " SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem GROUP BY rp_type_problem; ";
   
-  $Loopresult = mysqli_query($con, $sql);
+  $Loopresult = mysqli_query($conn, $sql);
   while ($row = mysqli_fetch_array($Loopresult)) { ?>
 
   <tr>
@@ -98,7 +98,7 @@ echo $data;?>
     <td>
     <?php 
   $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ผ่าน' AND year(rp_success_job) like '$y';";
-  $result = mysqli_query($con, $SSuc);
+  $result = mysqli_query($conn, $SSuc);
   $data=mysqli_num_rows($result);
   $APD[] = $data; 
   $PDsum = array_sum($APD);
@@ -108,7 +108,7 @@ echo $data;?>
     <td>
     <?php 
   $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'ไม่ผ่าน'AND year(rp_success_job) like '$y' ;";
-  $result = mysqli_query($con, $SSuc);
+  $result = mysqli_query($conn, $SSuc);
   $data=mysqli_num_rows($result);
   $AND[] = $data; 
   $NDsum = array_sum($AND);
@@ -118,7 +118,7 @@ echo $data;?>
     <td>
     <?php 
   $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND rp_sla_job like 'No SLA'AND year(rp_success_job) like '$y'  ;";
-  $result = mysqli_query($con, $SSuc);
+  $result = mysqli_query($conn, $SSuc);
   $data=mysqli_num_rows($result);
   $ANoSLAD[] = $data; 
   $NoSLADsum = array_sum($ANoSLAD);
@@ -128,7 +128,7 @@ echo $data;?>
     <td>
     <?php 
   $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND (rp_sla_job like 'เวลาไม่ถูกต้อง' or rp_sla_job like '') AND year(rp_success_job) like '$y' ;";
-  $result = mysqli_query($con, $SSuc);
+  $result = mysqli_query($conn, $SSuc);
   $data=mysqli_num_rows($result);
   $ANullD[] = $data; 
   $NullDsum = array_sum($ANullD);
@@ -138,7 +138,7 @@ echo $data;?>
     <td>
     <?php 
   $SSuc= "SELECT * FROM report_it WHERE rp_type_problem = '$r'AND year(rp_success_job) like '$y' ;";
-  $result = mysqli_query($con, $SSuc);
+  $result = mysqli_query($conn, $SSuc);
   $data=mysqli_num_rows($result);
   $AAllD[] = $data; 
   $AllDsum = array_sum($AAllD);

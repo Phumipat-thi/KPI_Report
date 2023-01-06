@@ -79,9 +79,9 @@ include('MnY.php');
           <option value=""> ------ทุกคน----- </option>
           <?php
           $selected_Peoples = isset($_POST['NameAdmin']) ? $_POST['NameAdmin'] : null;
-          require ("conn.php");
+          require ("connect.php");
           $query = "SELECT * FROM report_it GROUP BY rp_personnel_closed;";
-          $query_run  = mysqli_query($con, $query);
+          $query_run  = mysqli_query($conn, $query);
           while ($row = mysqli_fetch_assoc($query_run)) {
             $name = $row['rp_personnel_closed'];
             $selected = "";
@@ -102,9 +102,9 @@ include('MnY.php');
               <tr>
                 <th>
                           <?php
-                          require ("conn.php");
+                          require ("connect.php");
                           $brand_query = "SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem GROUP BY rp_type_problem;";
-                          $brand_query_run  = mysqli_query($con, $brand_query);
+                          $brand_query_run  = mysqli_query($conn, $brand_query);
 
                           if (mysqli_num_rows($brand_query_run) > 0) {
                             foreach ($brand_query_run as $Typeproblem) {
