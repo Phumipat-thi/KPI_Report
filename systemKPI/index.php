@@ -1,8 +1,7 @@
 <?php
-include('MnY.php');
-$M = $_POST['Month'];
-$y = $_POST['Year'];
-$EMP = $_POST['NameAdmin'];
+ error_reporting (E_ALL ^ E_NOTICE);
+
+//  error_reporting(0);
 
 // ทำ เข้า server 
 // session_start(); 
@@ -65,6 +64,12 @@ $EMP = $_POST['NameAdmin'];
 </head>
 
 <body>
+  <?php
+  include('MnY.php');
+  $M = $_POST['Month'];
+  $y = $_POST['Year'];
+  $EMP = $_POST['NameAdmin'];
+  ?>
   <style>
     body {
       background-color: #ffffff;
@@ -272,7 +277,7 @@ $EMP = $_POST['NameAdmin'];
               <br><br><br><br><br><br>
               <?php
               try {
-              $KPI = (($PDsum+$NoSLADsum) / $AllDsum) * 100;
+              $KPI = (($PDsum+$NoSLADsum) / ($AllDsum-$NullDsum)) * 100;
               $ans = number_format($KPI, 2);
               echo "$ans" . "%";
             } catch (DivisionByZeroError  $e) {
