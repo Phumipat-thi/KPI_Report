@@ -277,7 +277,7 @@
               <br><br><br><br><br><br>
               <?php
               try {
-              $KPI = (($PDsum+$NoSLADsum) / ($AllDsum-$NullDsum)) * 100;
+              $KPI = ((($PDsum+$NoSLADsum)-$NullDsum) / $AllDsum) * 100;
               $ans = number_format($KPI, 2);
               echo "$ans" . "%";
             } catch (DivisionByZeroError  $e) {
