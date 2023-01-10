@@ -1,6 +1,9 @@
 <?php
  error_reporting(0);
-
+ include('MnY.php');
+  $M = $_POST['Month'];
+  $y = $_POST['Year'];
+  $EMP = $_POST['NameAdmin'];
 // ทำ เข้า server 
 // session_start(); 
 // 	require_once("connect.php");
@@ -62,12 +65,6 @@
 </head>
 
 <body>
-  <?php
-  include('MnY.php');
-  $M = $_POST['Month'];
-  $y = $_POST['Year'];
-  $EMP = $_POST['NameAdmin'];
-  ?>
   <style>
     body {
       background-color: #ffffff;
