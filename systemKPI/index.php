@@ -1,7 +1,5 @@
 <?php
- error_reporting (E_ALL ^ E_WARNING);
-
-//  error_reporting(0);
+ error_reporting(0);
 
 // ทำ เข้า server 
 // session_start(); 

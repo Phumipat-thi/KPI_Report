@@ -1,5 +1,5 @@
 <?php 
- error_reporting (E_ALL ^ E_WARNING);
+ error_reporting(0);
 // Load the database configuration file 
 include('MnY.php');
 $M = $_POST['Month'];

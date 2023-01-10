@@ -1,5 +1,5 @@
 <?php
- error_reporting (E_ALL ^ E_WARNING);
+ error_reporting(0);
 include('MnY.php');
 
 // ทำ เข้า server 
