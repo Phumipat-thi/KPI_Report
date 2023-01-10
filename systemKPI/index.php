@@ -1,9 +1,9 @@
 <?php
  error_reporting(0);
  include('MnY.php');
-  $M = $_POST['Month'];
-  $y = $_POST['Year'];
-  $EMP = $_POST['NameAdmin'];
+ $M = $_POST['Month'];
+ $y = $_POST['Year'];
+ $EMP = $_POST['NameAdmin'];
 // ทำ เข้า server 
 // session_start(); 
 // 	require_once("connect.php");
@@ -65,6 +65,9 @@
 </head>
 
 <body>
+  <?php
+
+  ?>
   <style>
     body {
       background-color: #ffffff;
@@ -274,8 +277,11 @@
               try {
               $KPI = ((($PDsum+$NoSLADsum)-$NullDsum) / $AllDsum) * 100;
               $ans = number_format($KPI, 2);
-              echo "$ans" . "%";
-            } catch (DivisionByZeroError  $e) {
+              if(is_nan($ans)){
+                echo "<span style='color:red;font-weight:bold;'>0.00%</span>";
+              }else{echo "$ans" . "%";}
+              
+            } catch (DivisionByZeroError $e) {
                 // log the error message
                 error_log($e->getMessage());
                 // display a custom error page
