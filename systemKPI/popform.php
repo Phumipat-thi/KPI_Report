@@ -49,10 +49,10 @@ include('MnY.php');
 
   <div class="container">
     <div class="row justify-content-md-center">
-    <h1 align="center" style="font-family: 'IBM Plex Sans Thai', sans-serif;" >เมนู Export</h1>
+    <h1 align="center" style="font-family: 'Sarabun', sans-serif;" >เมนู Export</h1>
       <br>
         <form method="POST"  action="Func_Logiccheck.php">
-          <select  id="Year" name="Year"  style="width:34%; height:max-content; font-size:24px; background-color:#a3d68f; border-radius:8px; border-color:black; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
+          <select  id="Year" name="Year"  style="width:34%; height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:black; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
             <?php
             $selected_Year = isset($_POST['Year']) ? $_POST['Year'] : null;
             foreach ($Year as $Year_index => $Year_name) {
@@ -62,7 +62,7 @@ include('MnY.php');
               </option>
             <?php } ?>
           </select>
-          <select id="Month" name="Month"  style="width:34%; height:max-content; font-size:24px; background-color:#a3d68f; border-radius:8px; border-color:black; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
+          <select id="Month" name="Month"  style="width:34%; height:max-content; font-size:24px; background-color:#d9edf7; border-radius:8px; border-color:black; font-family: 'IBM Plex Sans Thai', sans-serif;  text-align:center;">
             <option value=""> ------ทั้งปี----- </option>
             <?php
             $selected_month = isset($_POST['Month']) ? $_POST['Month'] : null;
@@ -76,7 +76,7 @@ include('MnY.php');
             <?php } ?>
           </select>
 
-          <select id="NameAdmin" name="NameAdmin"  style="width:30% ;height:max-content; font-size:24px; background-color:#a3d68f ; border-radius:8px; border-color:black; text-align:center; font-family: 'IBM Plex Sans Thai', sans-serif;">
+          <select id="NameAdmin" name="NameAdmin"  style="width:30% ;height:max-content; font-size:24px; background-color:#d9edf7 ; border-radius:8px; border-color:black; text-align:center; font-family: 'IBM Plex Sans Thai', sans-serif;">
           <option value=""> ------ทุกคน----- </option>
           <?php
           $selected_Peoples = isset($_POST['NameAdmin']) ? $_POST['NameAdmin'] : null;
@@ -99,7 +99,7 @@ include('MnY.php');
   <br><br>
 
     <table class="table table-bordered">
-            <thead style=" background-color: #ff549690; font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 18px; text-align: center;">
+            <thead style=" background-color: #F8F8FF;  border: 4px solid #3333CC; font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 18px; text-align: center;">
               <tr>
                 <th>
                           <?php
@@ -131,7 +131,7 @@ include('MnY.php');
                         </tr>
                         </thead>
                         </table>
-                        <input type="submit" style="width:100% ;" class="btn btn-success" name="confirm" value="confirm " >
+                        <input type="submit" style="width:100% ;" class="btn btn-success" name="confirm" value="confirm "  >
                         <br><br>
                       </form>
                       

@@ -13,7 +13,7 @@ if(mysqli_num_rows($query) > 0){
     
     // Output each row of the data, format line as csv and write to file pointer 
     while($row = mysqli_fetch_assoc($query)){ 
-        $lineData = array($row['id'], $row['rp_id_emp'],$row['rp_order_id'], $row['rp_name'], $row['rp_surname'], $row['rp_dep'], $row['rp_email'], $row['rp_desk_phone'],$row['type_problem_name'],$row['rp_start_job'],$row['rp_pending_job'],$row['rp_success_job'],$row['rp_sumdate_job'],$row['rp_sla_job'],$row['rp_desc'],$row['rp_solve'],$row['rp_personnel_closed'],$row['rp_status'],$row['rp_result'],$row['rp_personnel_closed'],$row['cc_problem'],$row['cc_respond'],$row['report_agent'],$row['cc_problem_time'],$row['rp_desc'],$row['cc_problem'],$row['cc_closed'],$row['agent_closed']); 
+        $lineData = array($row['id'], $row['rp_id_emp'],$row['rp_order_id'], $row['rp_name'], $row['rp_surname'], $row['department_name'], $row['rp_email'], $row['rp_desk_phone'],$row['type_problem_name'],$row['rp_start_job'],$row['rp_pending_job'],$row['rp_success_job'],$row['rp_sumdate_job'],$row['rp_sla_job'],$row['rp_desc'],$row['rp_solve'],$row['rp_personnel_closed'],$row['rp_status'],$row['rp_result'],$row['rp_personnel_closed'],$row['cc_problem'],$row['cc_respond'],$row['report_agent'],$row['cc_problem_time'],$row['rp_desc'],$row['cc_problem'],$row['cc_closed'],$row['agent_closed']); 
         fputcsv($f, $lineData, $delimiter); 
     } 
     
@@ -28,4 +28,5 @@ if(mysqli_num_rows($query) > 0){
     fpassthru($f); 
   } 
 exit;  
+
 ?>

@@ -179,3 +179,41 @@ echo $AllDsum;?>
 
 
     <!--  สินสุด ส่วนของการใส่ข้อมูล Record -->
+
+    <!-- |-- Hidden --| ตัวแปรจากข้อมูลทั้งหมด เพื่อเอามาทำกับสัดส่วนจากงานทั้งหมด -->
+  <?php
+  //หากมีการกรอก filter
+if (isset($_POST['typeP'])) {
+    $pid = $_POST['typeP'];
+    $glue = "','";
+    $Spid = "'" . implode($glue, $pid) . "'";
+
+    $sql = " SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem WHERE rp_type_problem in ($Spid) GROUP BY rp_type_problem; ";
+    $Loopresult = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_array($Loopresult)) { ?>
+      <?php
+        $r = $row["rp_type_problem"];
+        // ข้อมูลทั้งหมด
+        $S2Suc = "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND MONTHNAME(rp_success_job) like '$M'  AND year(rp_success_job) like '$y';";
+        $result = mysqli_query($conn, $S2Suc);
+        $data4all = mysqli_num_rows($result);
+        $AAll4allD[] = $data4all;
+        $All4allDsum = array_sum($AAll4allD);// ตัวแปรที่จะนำไปใช้
+    }
+
+    //หากไม่มี จะแสดงผลให้หมดทุกตัว
+} elseif (empty($_POST['typeP'])) {
+  $sql = " SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem GROUP BY rp_type_problem; ";
+    $Loopresult = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_array($Loopresult)) { ?>
+      <?php
+        $r = $row["rp_type_problem"];
+        // ข้อมูลทั้งหมด
+        $S2Suc = "SELECT * FROM report_it WHERE rp_type_problem = '$r' AND MONTHNAME(rp_success_job) like '$M' AND year(rp_success_job) like '$y'  ;";
+        $result = mysqli_query($conn, $S2Suc);
+        $data4all = mysqli_num_rows($result);
+        $AAll4allD[] = $data4all;
+        $All4allDsum = array_sum($AAll4allD);// ตัวแปรที่จะนำไปใช้
+    }
+ }
+      ?>

@@ -4,6 +4,7 @@
  $M = $_POST['Month'];
  $y = $_POST['Year'];
  $EMP = $_POST['NameAdmin'];
+
 // ทำ เข้า server 
 // session_start(); 
 // 	require_once("connect.php");
@@ -164,7 +165,7 @@
           <?php
           $selected_Peoples = isset($_POST['NameAdmin']) ? $_POST['NameAdmin'] : null;
           require ("connect.php");
-          $query = "SELECT * FROM report_it GROUP BY rp_personnel_closed;";
+          $query = "SELECT * FROM report_it JOIN employee ON report_it.rp_personnel_closed = employee.emp_name GROUP BY rp_personnel_closed;";
           $query_run  = mysqli_query($conn, $query);
           while ($row = mysqli_fetch_assoc($query_run)) {
             $name = $row['rp_personnel_closed'];
@@ -190,7 +191,7 @@
 <!-- Filter แสดงปัญหา/ไม่แสดงปัญหา-->
     <div class="col-3 col-sm-3">
     <table class="table table-bordered">
-          <thead style="background-color: #e9e1ed; font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 16px; text-align: center;">
+          <thead style="background-color: #e9e1ed; font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 12px; text-align: center;">
             <tr>
               <th>
               <form method="POST">
@@ -233,10 +234,10 @@
           <!-- ส่วนของหัวตาราง -->
           <thead style="background-color: #ffb7f9b7; font-family: 'IBM Plex Sans Thai', sans-serif; font-size: 16px; text-align: center;">
             <tr>
-              <th style=" text-align:center;">ปัญหา</th>
+             <th style=" text-align:center;">ปัญหา</th>
               <th style=" text-align:center;">ผ่าน</th>
               <th style="  text-align:center;">ไม่ผ่าน</th>
-              <th style=" text-align:center;">No Sla</th>
+              <th style=" text-align:center;">No Sla</th >
               <th style=" text-align:center;">Null</th>
               <th style=" text-align:center;">ผลรวม</th>
             </tr>
@@ -245,13 +246,15 @@
 
       <!-- ส่วนของการใส่ข้อมูล Record -->
       <?php
-      if(empty($M) && empty($EMP)){
-        include('TB_ALL.php');
+if ((empty($M) && empty($EMP)) && isset($y)) {
+    include('TB_ALL.php');}
+       else if((empty($M) && empty($EMP)) && empty($y)) {
+        include('TB_fixnull.php');
       }else if(isset($M) && empty($EMP)) {
         include('TB_MCon.php');
       }else if(empty($M) && isset($EMP)) {
         include('TB_PCon.php');
-      }else {
+      }else if(isset($M) && isset($EMP)){
         include('TB_2Con.php');
       }
 ?>
@@ -262,17 +265,18 @@
 
     <!-- แสดงตารางฝั่งคำนวณ KPI-->
     <div class="col-3 col-sm-3">
+      <!-- คิดส่วนบุคคล ท่านนั้น -->
       <table class="table table-bordered">
         <thead style="background-color:#FFCCCC; font-family: 'IBM Plex Sans Thai', sans-serif; text-shadow: 10px; font-size: 20px;">
           <tr>
-            <th style="text-align:center;">คิดเป็นเปอร์เซนต์</th>
+            <th style="text-align:center;">คิดเป็น % ที่ผ่าน SLA </th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
-            <td style="text-align:center; height:534px; font-size: 28px; background-color: #AEFDD8; ">
-              <br><br><br><br><br><br>
+            <td style="text-align:center; height:204px; font-size: 28px; background-color: #AEFDD8; ">
+              <br><br>
               <?php
               try {
                 if ($AllDsum == 0 ){echo "<span style='color:red;font-weight:bold;'>0.00%</span>";
@@ -292,6 +296,40 @@
           </tr>
         </tbody>
       </table>
+<!-- จบคิดส่วนบุคคล ท่านนั้น -->
+
+<!-- คิดเป็นสัดส่วน จากงานทั้งหมด -->
+      <table class="table table-bordered">
+        <thead style="background-color:#CD5C5C; color:white; font-family: 'IBM Plex Sans Thai', sans-serif; text-shadow: 10px; font-size: 20px;">
+          <tr>
+            <th style="text-align:center;">คิดเป็นสัดส่วน จากงานทั้งหมด</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td style="text-align:center; height:204px; font-size: 28px; background-color: #33FF66; ">
+              <br><br>
+              <?php
+              try {
+                if ($AllDsum == 0 ){echo "<span style='color:red;font-weight:bold;'>0.00%</span>";
+                  }
+              else{ 
+                $KPIP = ((($PDsum+$NoSLADsum)-$NullDsum) / $All4allDsum) * 100 ;
+                $fromans = number_format($KPIP, 2);
+                echo "$fromans" . "%";}
+            } catch (DivisionByZeroError $e) {
+                // log the error message
+                error_log($e->getMessage());
+                // display a custom error page
+                 echo "<span style='color:red;font-weight:bold;'>0.00%</span>";
+            }
+              ?>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!--จบ คิดเป็นสัดส่วน จากงานทั้งหมด -->
     </div>
       <!-- จบ แสดงตารางฝั่งคำนวณ KPI-->
    
