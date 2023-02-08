@@ -16,22 +16,22 @@ if(isset($_POST['typeP'])){
     $Spid = "'" . implode($glue, $pid) . "'" ;
             if(empty($M) && empty($EMP)){
                 //คำสั่งquery
-                $query = mysqli_query($conn, "SELECT * FROM report_it  JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem JOIN department ON report_it.rp_dep = department.id_department WHERE rp_type_problem in ($Spid) AND year(rp_success_job) like '$y' ORDER BY id ASC");
+                $query = mysqli_query($conn, "SELECT * FROM report_it  JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem  JOIN comment ON report_it.rp_order_id = comment.rp_id_order  JOIN department ON report_it.rp_dep = department.id_department WHERE rp_type_problem in ($Spid) AND year(rp_success_job) like '$y' ");
                 //ชุดการทำงานเพื่อqueryมา save เป็นcsv
                 include('Func_ExportCSV.php');
               }else if(isset($M) && empty($EMP)) {
                 //คำสั่งquery
-                $query = mysqli_query($conn, "SELECT * FROM report_it  JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem JOIN department ON report_it.rp_dep = department.id_department WHERE rp_type_problem in ($Spid) AND year(rp_success_job) like '$y' ORDER BY id ASC");
+                $query = mysqli_query($conn, "SELECT * FROM report_it  JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem  JOIN comment ON report_it.rp_order_id = comment.rp_id_order  JOIN department ON report_it.rp_dep = department.id_department WHERE rp_type_problem in ($Spid) AND MONTHNAME(rp_success_job) like '$M' AND year(rp_success_job) like '$y' ");
                 //ชุดการทำงานเพื่อqueryมา save เป็นcsv
                 include('Func_ExportCSV.php'); 
               }else if(empty($M) && isset($EMP)) {
                 //คำสั่งquery
-                $query = mysqli_query($conn, "SELECT * FROM report_it  JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem JOIN department ON report_it.rp_dep = department.id_department WHERE rp_type_problem in ($Spid) AND year(rp_success_job) like '$y' ORDER BY id ASC");
+                $query = mysqli_query($conn, "SELECT * FROM report_it  JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem  JOIN comment ON report_it.rp_order_id = comment.rp_id_order  JOIN department ON report_it.rp_dep = department.id_department WHERE rp_type_problem in ($Spid) AND rp_personnel_closed = '$EMP' AND year(rp_success_job) like '$y' ");
                 //ชุดการทำงานเพื่อqueryมา save เป็นcsv
                 include('Func_ExportCSV.php'); 
               }else {
                 //คำสั่งquery
-                $query = mysqli_query($conn, "SELECT * FROM report_it  JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem JOIN department ON report_it.rp_dep = department.id_department WHERE rp_type_problem in ($Spid) AND year(rp_success_job) like '$y' ORDER BY id ASC");
+                $query = mysqli_query($conn, "SELECT * FROM report_it  JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem  JOIN comment ON report_it.rp_order_id = comment.rp_id_order  JOIN department ON report_it.rp_dep = department.id_department WHERE rp_type_problem in ($Spid)  AND rp_personnel_closed = '$EMP' AND MONTHNAME(rp_success_job) like '$M' AND year(rp_success_job) like '$y' ");
                 //ชุดการทำงานเพื่อqueryมา save เป็นcsv
                 include('Func_ExportCSV.php'); 
               }
