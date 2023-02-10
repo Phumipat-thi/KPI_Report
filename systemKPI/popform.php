@@ -81,7 +81,7 @@ include('MnY.php');
           <?php
           $selected_Peoples = isset($_POST['NameAdmin']) ? $_POST['NameAdmin'] : null;
           require ("connect.php");
-          $query = "SELECT * FROM report_it GROUP BY rp_personnel_closed;";
+          $query = "SELECT * FROM report_it JOIN employee ON report_it.rp_personnel_closed = employee.emp_name GROUP BY rp_personnel_closed;";
           $query_run  = mysqli_query($conn, $query);
           while ($row = mysqli_fetch_assoc($query_run)) {
             $name = $row['rp_personnel_closed'];

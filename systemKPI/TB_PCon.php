@@ -10,7 +10,7 @@
         <?php 
 
         require ("connect.php");
-        $sql = " SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem WHERE rp_type_problem in ($Spid)  GROUP BY `rp_type_problem`;  ";
+        $sql = " SELECT * FROM report_it INNER  JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem WHERE rp_type_problem in ($Spid)  GROUP BY `rp_type_problem`;  ";
         $Loopresult = mysqli_query($conn, $sql);
 
         while ($row = mysqli_fetch_array($Loopresult)) { ?>
@@ -79,7 +79,7 @@ $AllDsum = array_sum($AAllD);
         <?php 
 
         require ("connect.php");
-        $sql = " SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem   GROUP BY `rp_type_problem`;  ";
+        $sql = " SELECT * FROM report_it INNER JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem   GROUP BY `rp_type_problem`;  ";
         $Loopresult = mysqli_query($conn, $sql);
 
         while ($row = mysqli_fetch_array($Loopresult)) { ?>
@@ -187,7 +187,7 @@ if (isset($_POST['typeP'])) {
     $glue = "','";
     $Spid = "'" . implode($glue, $pid) . "'";
 
-    $sql = " SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem WHERE rp_type_problem in ($Spid) GROUP BY rp_type_problem; ";
+    $sql = " SELECT * FROM report_it INNER JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem WHERE rp_type_problem in ($Spid) GROUP BY rp_type_problem; ";
     $Loopresult = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_array($Loopresult)) { ?>
       <?php
@@ -202,7 +202,7 @@ if (isset($_POST['typeP'])) {
 
     //หากไม่มี จะแสดงผลให้หมดทุกตัว
 } elseif (empty($_POST['typeP'])) {
-  $sql = " SELECT * FROM report_it JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem GROUP BY rp_type_problem; ";
+  $sql = " SELECT * FROM report_it INNER JOIN type_problem ON report_it.rp_type_problem = type_problem.id_problem GROUP BY rp_type_problem; ";
     $Loopresult = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_array($Loopresult)) { ?>
       <?php
